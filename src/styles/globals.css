@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #000000;
+  --void-raised: #080808;
+  --void-elevated: #0F0F0F;
+  --void-subtle: #161616;
+
+  --neon: #00FFDD;
+  --neon-dim: #00CCB3;
+  --neon-glow: #00FFDD26;
+
+  --mag: #FF0066;
+  --mag-dim: #CC0052;
+  --mag-glow: #FF006622;
+
+  --volt: #FFE600;
+  --volt-dim: #CCB800;
+
+  --edge-faint: rgba(255,255,255,0.05);
+  --edge-subtle: rgba(255,255,255,0.1);
+  --edge-medium: rgba(255,255,255,0.18);
+  --edge-bright: rgba(255,255,255,0.35);
+
+  --light: #F0F0F0;
+  --light-dim: #A0A0A0;
+  --light-muted: #555555;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--void);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--void);
+  color: var(--light);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--neon);
+  color: var(--void);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--edge-subtle);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon);
+}
+
+/* Noise overlay — heavier for warehouse grain */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Section label — data markers */
+.section-label {
+  @apply font-mono text-[10px] tracking-[0.3em] uppercase text-light-muted;
+}
+
+/* Neon glow divider */
+.divider-neon {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0,255,221,0.4) 20%,
+    rgba(255,0,102,0.3) 50%,
+    rgba(0,255,221,0.4) 80%,
+    transparent 100%
+  );
+}
+
+/* Bass line — thick neon bar */
+.bass-line {
+  height: 3px;
+  background: var(--neon);
+  box-shadow: 0 0 12px var(--neon-glow), 0 0 40px var(--neon-glow);
+}
+
+/* EQ bar animation */
+.eq-bar {
+  width: 3px;
+  background: var(--neon);
+  border-radius: 1px;
+  animation: eq-bar 0.8s ease-in-out infinite;
+}
+
+/* Strobe flash overlay */
+.strobe-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: var(--neon);
+  opacity: 0;
+}
+
+/* Button snap — hardware feel */
+.btn-snap {
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.2s ease,
+              color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+.btn-snap:hover {
+  transform: scale(1.03);
+}
+
+/* Neon text glow utility */
+.text-neon-glow {
+  text-shadow: 0 0 8px rgba(0,255,221,0.5), 0 0 20px rgba(0,255,221,0.2);
+}
+
+.text-mag-glow {
+  text-shadow: 0 0 8px rgba(255,0,102,0.5), 0 0 20px rgba(255,0,102,0.2);
+}
+
+/* Scanlines */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0,0,0,0.08) 1px,
+    rgba(0,0,0,0.08) 2px
+  );
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
