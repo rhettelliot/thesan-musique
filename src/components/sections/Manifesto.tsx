@@ -1,11 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { prefersReducedMotion } from '@/lib/motion'
-
-gsap.registerPlugin(ScrollTrigger)
+import { revealOnEnter } from '@/lib/reveal'
 
 const manifesto = [
   'Bass is not sound.',
@@ -21,25 +17,13 @@ export function Manifesto() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const isReduced = prefersReducedMotion()
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('.mantra-line').forEach((line, i) => {
-        gsap.from(line, {
-          y: isReduced ? 0 : 40,
-          opacity: 0,
-          duration: isReduced ? 0.2 : 0.6,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: line,
-            start: 'top 88%',
-            once: true,
-          },
-          delay: isReduced ? 0 : i * 0.04,
-        })
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
+    const root = sectionRef.current
+    if (!root) return
+    const disposers: Array<() => void> = []
+    ;(async () => {
+      disposers.push(await revealOnEnter(root.querySelectorAll('.mantra-line'), { y: 40, duration: 0.6, stagger: 0.04 }))
+    })()
+    return () => disposers.forEach((d) => d())
   }, [])
 
   return (

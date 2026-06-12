@@ -120,6 +120,7 @@ export function Gatekeeper() {
   return (
     <div
       ref={containerRef}
+      data-gate=""
       className="fixed inset-0 z-50 bg-void flex flex-col items-center justify-center"
     >
       <div ref={flashRef} className="strobe-flash opacity-0" style={{ background: 'var(--neon)' }} />

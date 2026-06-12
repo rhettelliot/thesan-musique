@@ -165,3 +165,13 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+/* Keyboard navigation — accent outline, only for keyboard focus */
+:focus-visible {
+  outline: 1px solid #007AFF;
+  outline-offset: 3px;
+}
+
+/* Anchored sections land below the fixed nav */
+section[id] {
+  scroll-margin-top: 88px;
+}

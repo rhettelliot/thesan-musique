@@ -1,61 +1,22 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
-import { prefersReducedMotion } from '@/lib/motion'
-
-gsap.registerPlugin(ScrollTrigger)
+import { revealOnEnter } from '@/lib/reveal'
 
 export function Release() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const isReduced = prefersReducedMotion()
-    const ctx = gsap.context(() => {
-      gsap.from('.release-cover', {
-        y: isReduced ? 0 : 60,
-        opacity: 0,
-        duration: isReduced ? 0.2 : 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.release-cover',
-          start: 'top 85%',
-          once: true,
-        },
-      })
-
-      gsap.from('.release-info', {
-        x: isReduced ? 0 : 60,
-        opacity: 0,
-        duration: isReduced ? 0.2 : 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.release-info',
-          start: 'top 85%',
-          once: true,
-        },
-      })
-
-      // Track list stagger
-      gsap.utils.toArray<HTMLElement>('.track-row').forEach((row, i) => {
-        gsap.from(row, {
-          x: isReduced ? 0 : -30,
-          opacity: 0,
-          duration: isReduced ? 0.2 : 0.5,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: row,
-            start: 'top 90%',
-            once: true,
-          },
-          delay: isReduced ? 0 : i * 0.05,
-        })
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
+    const root = sectionRef.current
+    if (!root) return
+    const disposers: Array<() => void> = []
+    ;(async () => {
+      disposers.push(await revealOnEnter(root.querySelectorAll('.release-cover'), { y: 60, duration: 0.9 }))
+      disposers.push(await revealOnEnter(root.querySelectorAll('.release-info'), { y: 0, x: 60, duration: 0.8 }))
+      disposers.push(await revealOnEnter(root.querySelectorAll('.track-row'), { y: 0, x: -30, duration: 0.5, stagger: 0.05 }))
+    })()
+    return () => disposers.forEach((d) => d())
   }, [])
 
   return (
