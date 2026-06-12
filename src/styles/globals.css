@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --void: #000000;
-  --void-raised: #080808;
-  --void-elevated: #0F0F0F;
-  --void-subtle: #161616;
+  --void: #020203;
+  --void-raised: #0a0a0b;
+  --void-elevated: #121214;
+  --void-subtle: #1a1a1d;
 
-  --neon: #00FFDD;
-  --neon-dim: #00CCB3;
-  --neon-glow: #00FFDD26;
+  --neon: #007AFF;
+  --neon-dim: #005BCC;
+  --neon-glow: #007AFF26;
 
-  --mag: #FF0066;
-  --mag-dim: #CC0052;
-  --mag-glow: #FF006622;
+  --mag: #FF6B35;
+  --mag-dim: #CC552A;
+  --mag-glow: #FF6B3522;
 
   --volt: #FFE600;
   --volt-dim: #CCB800;

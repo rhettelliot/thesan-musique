@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
+import { prefersReducedMotion } from '@/lib/motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -11,11 +12,12 @@ export function Release() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    const isReduced = prefersReducedMotion()
     const ctx = gsap.context(() => {
       gsap.from('.release-cover', {
-        y: 60,
+        y: isReduced ? 0 : 60,
         opacity: 0,
-        duration: 0.9,
+        duration: isReduced ? 0.2 : 0.9,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.release-cover',
@@ -25,9 +27,9 @@ export function Release() {
       })
 
       gsap.from('.release-info', {
-        x: 60,
+        x: isReduced ? 0 : 60,
         opacity: 0,
-        duration: 0.8,
+        duration: isReduced ? 0.2 : 0.8,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.release-info',
@@ -39,16 +41,16 @@ export function Release() {
       // Track list stagger
       gsap.utils.toArray<HTMLElement>('.track-row').forEach((row, i) => {
         gsap.from(row, {
-          x: -30,
+          x: isReduced ? 0 : -30,
           opacity: 0,
-          duration: 0.5,
+          duration: isReduced ? 0.2 : 0.5,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: row,
             start: 'top 90%',
             once: true,
           },
-          delay: i * 0.05,
+          delay: isReduced ? 0 : i * 0.05,
         })
       })
     }, sectionRef)
@@ -68,7 +70,7 @@ export function Release() {
               className="relative aspect-square overflow-hidden"
               style={{
                 border: '1px solid var(--edge-faint)',
-                boxShadow: '0 0 60px rgba(0,255,221,0.08), 0 0 120px rgba(255,0,102,0.04)',
+                boxShadow: '0 0 60px var(--neon-glow), 0 0 120px var(--mag-glow)',
               }}
             >
               <Image
@@ -83,11 +85,11 @@ export function Release() {
               <div className="absolute top-0 right-0 w-16 h-16">
                 <div
                   className="absolute top-0 right-0 w-full h-[2px]"
-                  style={{ background: 'linear-gradient(270deg, #00FFDD, transparent)' }}
+                  style={{ background: 'linear-gradient(270deg, var(--neon), transparent)' }}
                 />
                 <div
                   className="absolute top-0 right-0 w-[2px] h-full"
-                  style={{ background: 'linear-gradient(180deg, #FF0066, transparent)' }}
+                  style={{ background: 'linear-gradient(180deg, var(--mag), transparent)' }}
                 />
               </div>
             </div>
@@ -120,7 +122,7 @@ export function Release() {
                 target="_blank"
                 rel="noreferrer noopener"
                 className="font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 border border-neon text-neon btn-snap hover:bg-neon hover:text-void transition-colors duration-200"
-                style={{ boxShadow: '0 0 10px rgba(0,255,221,0.15)' }}
+                style={{ boxShadow: '0 0 10px var(--neon-glow)' }}
               >
                 Listen Now
               </a>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { prefersReducedMotion } from '@/lib/motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -10,11 +11,12 @@ export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    const isReduced = prefersReducedMotion()
     const ctx = gsap.context(() => {
       gsap.from('.cta-content', {
-        y: 40,
+        y: isReduced ? 0 : 40,
         opacity: 0,
-        duration: 0.8,
+        duration: isReduced ? 0.2 : 0.8,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -39,7 +41,7 @@ export function CTASection() {
                 className="w-[3px] rounded-sm"
                 style={{
                   height: `${4 + Math.abs(Math.sin(i * 0.35)) * 36}px`,
-                  backgroundColor: i % 8 === 0 ? '#FF0066' : i % 2 === 0 ? '#00FFDD' : '#555',
+                  backgroundColor: i % 8 === 0 ? 'var(--mag)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
                 }}
               />
             ))}
@@ -56,7 +58,7 @@ export function CTASection() {
             <a
               href="mailto:demo@manteisrecordings.com"
               className="inline-block font-mono text-[10px] tracking-[0.25em] uppercase px-8 py-4 border border-neon text-neon btn-snap hover:bg-neon hover:text-void transition-colors duration-200"
-              style={{ boxShadow: '0 0 10px rgba(0,255,221,0.15)' }}
+              style={{ boxShadow: '0 0 10px var(--neon-glow)' }}
             >
               Submit Demo
             </a>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { prefersReducedMotion } from '@/lib/motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,19 +21,20 @@ export function Manifesto() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    const isReduced = prefersReducedMotion()
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>('.mantra-line').forEach((line, i) => {
         gsap.from(line, {
-          y: 40,
+          y: isReduced ? 0 : 40,
           opacity: 0,
-          duration: 0.6,
+          duration: isReduced ? 0.2 : 0.6,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: line,
             start: 'top 88%',
             once: true,
           },
-          delay: i * 0.04,
+          delay: isReduced ? 0 : i * 0.04,
         })
       })
     }, sectionRef)

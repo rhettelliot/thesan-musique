@@ -3,26 +3,28 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { prefersReducedMotion } from '@/lib/motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const specs = [
-  { label: '174', unit: 'BPM', color: '#FFE600', desc: 'Peak tempo' },
-  { label: '4/4', unit: 'TIME', color: '#00FFDD', desc: 'Structural pulse' },
-  { label: '140', unit: 'HZ', color: '#FF0066', desc: 'Sub frequency' },
-  { label: '∞', unit: 'SIGNAL', color: '#00FFDD', desc: 'Output active' },
+  { label: '174', unit: 'BPM', color: 'var(--volt)', desc: 'Peak tempo' },
+  { label: '4/4', unit: 'TIME', color: 'var(--neon)', desc: 'Structural pulse' },
+  { label: '140', unit: 'HZ', color: 'var(--mag)', desc: 'Sub frequency' },
+  { label: '∞', unit: 'SIGNAL', color: 'var(--neon)', desc: 'Output active' },
 ]
 
 export function Specs() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    const isReduced = prefersReducedMotion()
     const ctx = gsap.context(() => {
       gsap.from('.spec-cell', {
-        y: 30,
+        y: isReduced ? 0 : 30,
         opacity: 0,
-        duration: 0.5,
-        stagger: 0.08,
+        duration: isReduced ? 0.2 : 0.5,
+        stagger: isReduced ? 0 : 0.08,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,

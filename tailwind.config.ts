@@ -11,23 +11,23 @@ const config: Config = {
       colors: {
         // Thesan Musique — warehouse / rave / bass pressure
         void: {
-          DEFAULT: '#000000',
-          raised: '#080808',
-          elevated: '#0F0F0F',
-          subtle: '#161616',
+          DEFAULT: '#020203',
+          raised: '#0a0a0b',
+          elevated: '#121214',
+          subtle: '#1a1a1d',
         },
-        // Neon Cyan — main signal (not blue, not purple — pure rave cyan)
+        // Electric Blue — main signal
         neon: {
-          DEFAULT: '#00FFDD',
-          dim: '#00CCB3',
-          glow: '#00FFDD26',
-          hot: '#00FFDD',
+          DEFAULT: '#007AFF',
+          dim: '#005BCC',
+          glow: '#007AFF26',
+          hot: '#007AFF',
         },
-        // Magenta Flash — secondary, bass hits, strobe accents
+        // Solar Gold — secondary, accents
         mag: {
-          DEFAULT: '#FF0066',
-          dim: '#CC0052',
-          glow: '#FF006622',
+          DEFAULT: '#FF6B35',
+          dim: '#CC552A',
+          glow: '#FF6B3522',
         },
         // Warning Yellow — tempo markers, BPM data
         volt: {
