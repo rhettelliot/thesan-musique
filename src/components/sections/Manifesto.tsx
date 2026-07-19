@@ -45,7 +45,7 @@ export function Manifesto() {
                   i === manifesto.length - 1
                     ? 'font-bold text-neon text-neon-glow'
                     : i === 0
-                      ? 'font-bold text-mag text-mag-glow'
+                      ? 'font-bold text-mag'
                       : i === manifesto.length - 2
                         ? 'text-light-dim'
                         : 'text-light'
