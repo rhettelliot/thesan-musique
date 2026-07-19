@@ -82,15 +82,15 @@ body {
   @apply font-mono text-[10px] tracking-[0.3em] uppercase text-light-muted;
 }
 
-/* Neon glow divider */
+/* Neon glow divider — uses actual site signal tokens (neon blue + mag) */
 .divider-neon {
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0,255,221,0.4) 20%,
-    rgba(255,0,102,0.3) 50%,
-    rgba(0,255,221,0.4) 80%,
+    rgba(0,122,255,0.4) 20%,
+    rgba(255,107,53,0.3) 50%,
+    rgba(0,122,255,0.4) 80%,
     transparent 100%
   );
 }
@@ -131,13 +131,13 @@ body {
   transform: scale(1.03);
 }
 
-/* Neon text glow utility */
+/* Neon text glow utility — uses actual site signal tokens */
 .text-neon-glow {
-  text-shadow: 0 0 8px rgba(0,255,221,0.5), 0 0 20px rgba(0,255,221,0.2);
+  text-shadow: 0 0 8px rgba(0,122,255,0.5), 0 0 20px rgba(0,122,255,0.2);
 }
 
 .text-mag-glow {
-  text-shadow: 0 0 8px rgba(255,0,102,0.5), 0 0 20px rgba(255,0,102,0.2);
+  text-shadow: 0 0 8px rgba(255,107,53,0.5), 0 0 20px rgba(255,107,53,0.2);
 }
 
 /* Scanlines */
