@@ -9,47 +9,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Thesan Musique — warehouse / rave / bass pressure
+        // Void Architecture — absolute black, depth carved from nothing
         void: {
-          DEFAULT: '#020203',
-          raised: '#0a0a0b',
-          elevated: '#121214',
-          subtle: '#1a1a1d',
+          DEFAULT: '#000000',
+          raised: '#0C0C0C',
+          elevated: '#141414',
+          subtle: '#1C1C1C',
         },
-        // Electric Blue — main signal
-        neon: {
-          DEFAULT: '#007AFF',
-          dim: '#005BCC',
-          glow: '#007AFF26',
-          hot: '#007AFF',
-        },
-        // Solar Gold — secondary, accents
-        mag: {
-          DEFAULT: '#FF6B35',
-          dim: '#CC552A',
-          glow: '#FF6B3522',
-        },
-        // Warning Yellow — tempo markers, BPM data
-        volt: {
-          DEFAULT: '#FFE600',
-          dim: '#CCB800',
+        // Single Signal — warehouse cyan. Active states, key data, section labels only.
+        signal: {
+          DEFAULT: '#00FFDD',
+          dim: '#00B29B',
         },
         edge: {
-          faint: 'rgba(255,255,255,0.05)',
-          subtle: 'rgba(255,255,255,0.1)',
-          medium: 'rgba(255,255,255,0.18)',
+          faint: 'rgba(255,255,255,0.06)',
+          subtle: 'rgba(255,255,255,0.12)',
+          medium: 'rgba(255,255,255,0.2)',
           bright: 'rgba(255,255,255,0.35)',
         },
         light: {
           DEFAULT: '#F0F0F0',
-          dim: '#A0A0A0',
-          muted: '#555555',
+          dim: '#A6A6A6',
+          muted: '#737373',
         },
       },
       fontFamily: {
         display: ['var(--font-display)', 'system-ui', 'sans-serif'],
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
+      },
+      transitionTimingFunction: {
+        cinematic: 'cubic-bezier(0.45, 0.05, 0.55, 0.95)',
+        enter: 'cubic-bezier(0, 0, 0.25, 1)',
+        exit: 'cubic-bezier(0.75, 0, 1, 1)',
       },
       keyframes: {
         'fade-in': {
@@ -60,19 +52,7 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateY(30px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
-        strobe: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.3' },
-        },
-        'bass-pulse': {
-          '0%, 100%': { transform: 'scaleX(1)' },
-          '50%': { transform: 'scaleX(1.4)' },
-        },
-        'eq-bar': {
-          '0%, 100%': { transform: 'scaleY(0.3)' },
-          '50%': { transform: 'scaleY(1)' },
-        },
-        'flicker': {
+        flicker: {
           '0%, 100%': { opacity: '1' },
           '10%': { opacity: '0.8' },
           '20%': { opacity: '1' },
@@ -83,11 +63,8 @@ const config: Config = {
         },
       },
       animation: {
-        'fade-in': 'fade-in 0.8s ease-out forwards',
-        'slide-up': 'slide-up 0.6s ease-out forwards',
-        strobe: 'strobe 0.15s ease-in-out 3',
-        'bass-pulse': 'bass-pulse 0.6s ease-in-out infinite',
-        'eq-bar': 'eq-bar 0.8s ease-in-out infinite',
+        'fade-in': 'fade-in 0.8s cubic-bezier(0, 0, 0.25, 1) forwards',
+        'slide-up': 'slide-up 0.6s cubic-bezier(0, 0, 0.25, 1) forwards',
         flicker: 'flicker 3s ease-in-out infinite',
       },
     },
