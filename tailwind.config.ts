@@ -30,7 +30,7 @@ const config: Config = {
         light: {
           DEFAULT: '#F0F0F0',
           dim: '#A6A6A6',
-          muted: '#737373',
+          muted: '#767676',
         },
       },
       fontFamily: {

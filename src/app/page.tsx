@@ -34,8 +34,10 @@ export default function Home() {
       <Gatekeeper />
       {entered && (
         <SmoothScroll>
-          <Navigation />
-          <main>
+          <header>
+            <Navigation />
+          </header>
+          <main id="main-content" tabIndex={-1}>
             <Hero />
             <Specs />
             <Release />

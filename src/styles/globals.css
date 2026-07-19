@@ -18,7 +18,7 @@
 
   --light: #F0F0F0;
   --light-dim: #A6A6A6;
-  --light-muted: #737373;
+  --light-muted: #767676;
 
   --ease-cinematic: cubic-bezier(0.45, 0.05, 0.55, 0.95);
   --ease-enter: cubic-bezier(0, 0, 0.25, 1);
@@ -120,4 +120,26 @@ body {
 /* Anchored sections land below the fixed nav */
 section[id] {
   scroll-margin-top: 88px;
+}
+
+/* Skip link - first focusable element for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 1001;
+  padding: 0.75rem 1rem;
+  background: var(--void);
+  color: var(--signal);
+  border: 1px solid var(--signal);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
 }

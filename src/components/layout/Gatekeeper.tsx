@@ -23,6 +23,14 @@ export function Gatekeeper() {
   useEffect(() => {
     if (entered) return
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleEnter()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
     const isReduced = prefersReducedMotion()
 
     const ctx = gsap.context(() => {
@@ -74,7 +82,10 @@ export function Gatekeeper() {
       )
     }, containerRef)
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [entered])
 
   if (entered) return null
@@ -121,6 +132,9 @@ export function Gatekeeper() {
     <div
       ref={containerRef}
       data-gate=""
+      role="dialog"
+      aria-modal="true"
+      aria-label="Welcome to Thesan Musique"
       className="fixed inset-0 z-50 bg-void flex flex-col items-center justify-center"
     >
       <div ref={flashRef} className="strobe-flash opacity-0" style={{ background: 'var(--neon)' }} />
@@ -150,14 +164,14 @@ export function Gatekeeper() {
 
       <div className="relative z-10 text-center px-6">
         <div ref={titleTopRef} className="opacity-0">
-          <h1 className="font-display text-7xl md:text-[10rem] lg:text-[12rem] font-bold tracking-[-0.06em] leading-[0.75] uppercase">
+          <h2 className="font-display text-7xl md:text-[10rem] lg:text-[12rem] font-bold tracking-[-0.06em] leading-[0.75] uppercase">
             Thesan
-          </h1>
+          </h2>
         </div>
         <div ref={titleBottomRef} className="opacity-0">
-          <h1 className="font-display text-7xl md:text-[10rem] lg:text-[12rem] font-bold tracking-[-0.06em] leading-[0.75] text-neon uppercase text-neon-glow">
+          <h2 className="font-display text-7xl md:text-[10rem] lg:text-[12rem] font-bold tracking-[-0.06em] leading-[0.75] text-neon uppercase text-neon-glow">
             Musique
-          </h1>
+          </h2>
         </div>
 
         <p
@@ -169,10 +183,11 @@ export function Gatekeeper() {
 
         <button
           ref={btnRef}
+          autoFocus
           onClick={handleEnter}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="opacity-0 mt-8 font-mono text-[10px] tracking-[0.25em] uppercase px-8 py-3 border border-neon text-neon btn-snap hover:bg-neon hover:text-void transition-colors duration-200"
+          className="mt-8 font-mono text-[10px] tracking-[0.25em] uppercase px-8 py-3 border border-neon text-neon btn-snap hover:bg-neon hover:text-void transition-colors duration-200"
           style={{ boxShadow: '0 0 10px var(--neon-glow)' }}
         >
           Enter the Frequency
