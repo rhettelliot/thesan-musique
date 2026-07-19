@@ -105,8 +105,8 @@ export function Hero() {
       </div>
 
       {/* Title */}
-      <div ref={titleRef} className="relative z-10 text-center">
-        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
+      <div ref={titleRef} className="relative z-10 text-center px-4">
+        <h1 className="font-display text-[clamp(40px,8vw,96px)] font-bold tracking-[-0.05em] leading-[0.82] uppercase text-hero-glow">
           <span className="block">Thesan</span>
           <span className="block text-neon text-neon-glow">Musique</span>
         </h1>

@@ -11,8 +11,8 @@ export function Navigation() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-void/85 backdrop-blur-xl border-b border-edge-faint">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 h-14 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-40 glass">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="font-display text-lg font-bold tracking-[-0.02em] uppercase">
           <span className="text-neon text-neon-glow">TM</span>
@@ -56,7 +56,7 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-void/95 backdrop-blur-xl border-b border-edge-faint px-6 py-6 space-y-4">
+        <div className="md:hidden bg-void/95 backdrop-blur-xl border-b border-neon/20 px-6 py-6 space-y-4">
           {links.map((link) => (
             <a
               key={link.href}

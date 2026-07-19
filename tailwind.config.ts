@@ -21,6 +21,19 @@ const config: Config = {
           DEFAULT: '#00FFDD',
           dim: '#00B29B',
         },
+        // Neon / Mag / Volt aliases used across components
+        neon: {
+          DEFAULT: '#00FFDD',
+          dim: '#00B29B',
+          glow: 'rgba(0,255,221,0.45)',
+        },
+        mag: {
+          DEFAULT: '#FF6B35',
+          glow: 'rgba(255,107,53,0.40)',
+        },
+        volt: {
+          DEFAULT: '#007AFF',
+        },
         edge: {
           faint: 'rgba(255,255,255,0.06)',
           subtle: 'rgba(255,255,255,0.12)',

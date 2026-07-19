@@ -28,7 +28,7 @@ export function Release() {
           {/* Cover art */}
           <div className="release-cover w-full md:w-1/2">
             <div
-              className="relative aspect-square overflow-hidden"
+              className="relative aspect-square overflow-hidden group"
               style={{
                 border: '1px solid var(--edge-faint)',
                 boxShadow: '0 0 60px var(--neon-glow), 0 0 120px var(--mag-glow)',
@@ -38,7 +38,7 @@ export function Release() {
                 src="/covers/Thesan.webp"
                 alt="Ataraxia cover art"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 ease-cinematic group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />

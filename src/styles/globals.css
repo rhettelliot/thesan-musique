@@ -11,6 +11,15 @@
   --signal: #00FFDD;
   --signal-dim: #00B29B;
 
+  --neon: #00FFDD;
+  --neon-dim: #00B29B;
+  --neon-glow: rgba(0,255,221,0.45);
+  --neon-soft: rgba(0,255,221,0.12);
+
+  --mag: #FF6B35;
+  --mag-glow: rgba(255,107,53,0.40);
+  --volt: #007AFF;
+
   --edge-faint: rgba(255,255,255,0.06);
   --edge-subtle: rgba(255,255,255,0.12);
   --edge-medium: rgba(255,255,255,0.2);
@@ -121,6 +130,56 @@ body {
 section[id] {
   scroll-margin-top: 88px;
 }
+
+/* Utility patterns */
+.text-neon-glow {
+  text-shadow: 0 0 18px var(--neon-glow), 0 0 36px var(--neon-soft);
+}
+
+.text-mag-glow {
+  text-shadow: 0 0 18px var(--mag-glow);
+}
+
+.text-hero-glow {
+  text-shadow:
+    0 0 24px var(--neon-glow),
+    0 0 48px var(--neon-soft),
+    0 0 80px rgba(0,255,221,0.06);
+}
+
+.btn-snap {
+  transition: transform 0.15s var(--ease-enter), background 0.2s var(--ease-enter), color 0.2s var(--ease-enter);
+}
+.btn-snap:active {
+  transform: scale(0.97);
+}
+
+.bass-line {
+  height: 3px;
+  background: linear-gradient(90deg, var(--neon), var(--mag) 50%, transparent);
+  opacity: 0.8;
+}
+
+.divider-neon {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon) 20%, var(--mag) 50%, var(--neon) 80%, transparent);
+  opacity: 0.5;
+}
+
+/* Glass morphism helpers */
+.glass {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(0,255,221,0.18);
+}
+
+/* Footer gradient rule */
+.footer-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon) 15%, var(--mag) 50%, var(--neon) 85%, transparent);
+}
+
 
 /* Skip link - first focusable element for keyboard users */
 .skip-link {

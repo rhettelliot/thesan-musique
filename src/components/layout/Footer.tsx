@@ -1,8 +1,9 @@
 export function Footer() {
   return (
-    <footer className="py-16 md:py-24 border-t border-edge-faint">
+    <footer className="relative pt-20 md:pt-28 pb-12 md:pb-16">
+      <div className="footer-rule absolute top-0 left-0 right-0" />
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 md:gap-8">
           {/* Left */}
           <div>
             <h3 className="font-display text-2xl font-bold tracking-[-0.02em] uppercase">
@@ -41,7 +42,7 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-6 border-t border-edge-faint flex flex-col md:flex-row justify-between items-center gap-2">
+        <div className="mt-16 md:mt-20 pt-6 border-t border-edge-faint flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="font-mono text-[8px] tracking-[0.15em] text-light-muted">
             © {new Date().getFullYear()} Thesan Musique. All frequencies reserved.
           </p>
