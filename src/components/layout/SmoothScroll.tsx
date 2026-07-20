@@ -11,6 +11,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
+    // Native scroll for users who opt out of motion (WCAG 2.2 AA)
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -21,15 +24,18 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     lenis.on('scroll', ScrollTrigger.update)
 
-    gsap.ticker.add((time) => {
+    // Store the exact closure reference so cleanup removes the SAME callback
+    // (passing lenis.raf directly fails — it's a different function object)
+    const tick = (time: number) => {
       lenis.raf(time * 1000)
-    })
+    }
+    gsap.ticker.add(tick)
 
     gsap.ticker.lagSmoothing(0)
 
     return () => {
       lenis.destroy()
-      gsap.ticker.remove(lenis.raf as unknown as gsap.TickerCallback)
+      gsap.ticker.remove(tick)
     }
   }, [])
 

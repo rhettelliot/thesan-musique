@@ -4,21 +4,21 @@ export default function NotFound() {
   return (
     <main
       className="min-h-screen flex flex-col items-center justify-center text-center px-6"
-      style={{ backgroundColor: '#020203' }}
+      style={{ backgroundColor: 'var(--void)' }}
     >
-      <p className="font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: '#007AFF' }}>
+      <p className="font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: 'var(--signal)' }}>
         404 — Track not found
       </p>
-      <h1 className="font-display text-4xl md:text-6xl mt-6 mb-4" style={{ color: '#F0F0F0' }}>
+      <h1 className="font-display text-4xl md:text-6xl mt-6 mb-4" style={{ color: 'var(--light)' }}>
         Page not found
       </h1>
-      <p className="font-body text-sm mb-12" style={{ color: '#888888' }}>
+      <p className="font-body text-sm mb-12" style={{ color: 'var(--light-muted)' }}>
         This channel carries no signal.
       </p>
       <Link
         href="/"
         className="font-mono text-[10px] tracking-[0.25em] uppercase px-8 py-4 border transition-colors duration-200"
-        style={{ borderColor: '#007AFF', color: '#007AFF' }}
+        style={{ borderColor: 'var(--signal)', color: 'var(--signal)' }}
       >
         Return to the floor
       </Link>
