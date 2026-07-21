@@ -23,6 +23,12 @@
   --ease-cinematic: cubic-bezier(0.45, 0.05, 0.55, 0.95);
   --ease-enter: cubic-bezier(0, 0, 0.25, 1);
   --ease-exit: cubic-bezier(0.75, 0, 1, 1);
+
+  --neon: #00FFDD;
+  --neon-glow: rgba(0,255,221,0.28);
+  --mag: #FF007F;
+  --mag-glow: rgba(255,0,127,0.28);
+  --volt: #A855F7;
 }
 
 * {
@@ -113,9 +119,51 @@ body {
 
 /* Keyboard navigation — signal outline, only for keyboard focus */
 :focus-visible {
-  outline: 1px solid var(--signal);
+  outline: 2px solid var(--signal);
   outline-offset: 3px;
 }
+
+/* Signal text must meet WCAG 4.5:1 on #000000 (10px-13px labels are small text) */
+.text-signal,
+[data-signal] {
+  color: #FF4D9E;
+}
+
+/* Hover/focus state for signal text */
+a:hover.text-signal,
+a:focus-visible.text-signal,
+[data-signal]:hover,
+[data-signal]:focus-visible {
+  color: #00FFDD;
+}
+
+/* Focus-visible outline override for browsers that need explicit target */
+*:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+/* Utility aliases for legacy component tokens (map to design system signal) */
+.text-neon { color: var(--neon); }
+.text-mag { color: var(--mag); }
+.text-volt { color: var(--volt); }
+.border-neon { border-color: var(--neon); }
+.bg-neon { background-color: var(--neon); }
+.hover\:text-neon:hover { color: var(--neon); }
+.hover\:bg-neon:hover { background-color: var(--neon); }
+.hover\:text-void:hover { color: var(--void); }
+.text-neon-glow { text-shadow: 0 0 12px var(--neon-glow); }
+.text-mag-glow { text-shadow: 0 0 12px var(--mag-glow); }
+.bass-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon), var(--mag), var(--neon));
+}
+.divider-neon {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  opacity: 0.5;
+}
+.btn-snap { transition-property: color, background-color, border-color; }
 
 /* Anchored sections land below the fixed nav */
 section[id] {
