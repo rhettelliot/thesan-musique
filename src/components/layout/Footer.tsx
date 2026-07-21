@@ -64,7 +64,7 @@ export function Footer() {
               Roster
             </span>
             <div className="flex flex-col md:items-end gap-1">
-              <a href="https://redshiftmantra.com" target="_blank" rel="noreferrer noopener" aria-label="Visit Red Shift Mantra artist site (opens in new tab)" className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-neon transition-colors duration-200">Red Shift Mantra ↗</a>
+              <a href="https://redshiftmantra.vercel.app" target="_blank" rel="noreferrer noopener" aria-label="Visit Red Shift Mantra artist site (opens in new tab)" className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-neon transition-colors duration-200">Red Shift Mantra ↗</a>
               <a href="https://manteis-project-site.vercel.app" target="_blank" rel="noreferrer noopener" aria-label="Visit The Manteis Project artist site (opens in new tab)" className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-neon transition-colors duration-200">The Manteis Project ↗</a>
               <a href="https://brindavan-gardens-site.vercel.app" target="_blank" rel="noreferrer noopener" aria-label="Visit Brindavan Gardens artist site (opens in new tab)" className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-neon transition-colors duration-200">Brindavan Gardens ↗</a>
               <a href="https://bethany-pritchett-site.vercel.app" target="_blank" rel="noreferrer noopener" aria-label="Visit Bethany Pritchett artist site (opens in new tab)" className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-neon transition-colors duration-200">Bethany Pritchett ↗</a>
