@@ -40,12 +40,14 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     <div className="relative">
       {/* Fog vignettes */}
       <div
+        aria-hidden="true"
         className="fixed top-0 left-0 right-0 h-32 pointer-events-none z-30"
         style={{
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)',
         }}
       />
       <div
+        aria-hidden="true"
         className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-30"
         style={{
           background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',

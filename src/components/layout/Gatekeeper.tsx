@@ -148,7 +148,7 @@ export function Gatekeeper() {
         }}
       />
 
-      <div ref={eqRef} className="absolute left-8 bottom-8 flex items-end gap-[2px]">
+      <div ref={eqRef} className="absolute left-8 bottom-8 flex items-end gap-[2px]" aria-hidden="true">
         {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={i}

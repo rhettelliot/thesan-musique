@@ -21,7 +21,7 @@ export function CTASection() {
       <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
         <div className="cta-content">
           {/* Bass waveform */}
-          <div className="flex items-end justify-center gap-[3px] mb-8 h-10">
+          <div className="flex items-end justify-center gap-[3px] mb-8 h-10" aria-hidden="true">
             {Array.from({ length: 32 }).map((_, i) => (
               <div
                 key={i}

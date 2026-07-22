@@ -15,7 +15,7 @@ export function Navigation() {
       <nav className="bg-void/85 backdrop-blur-[8px] border-b border-edge-faint">
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-14 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="font-display text-lg font-bold tracking-[-0.02em] uppercase">
+          <a href="#" aria-label="Thesan Musique home" className="font-display text-lg font-bold tracking-[-0.02em] uppercase">
             <span className="text-neon text-neon-glow">TM</span>
             <span className="text-light-muted font-mono text-[9px] tracking-[0.15em] ml-2 hidden md:inline">
               MR-002

@@ -1,11 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { prefersReducedMotion } from '@/lib/motion'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -14,51 +10,65 @@ export function Hero() {
   const indicatorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const isReduced = prefersReducedMotion()
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 })
+    let ctx: { revert: () => void } | undefined
+    let cancelled = false
 
-      // Title slams in
-      tl.fromTo(
-        titleRef.current,
-        { opacity: 0, y: isReduced ? 0 : 80, scaleY: isReduced ? 1 : 1.2 },
-        { opacity: 1, y: 0, scaleY: 1, duration: isReduced ? 0.2 : 0.8, ease: 'power4.out' }
-      )
+    ;(async () => {
+      const gsapModule = await import('gsap')
+      const scrollTriggerModule = await import('gsap/ScrollTrigger')
+      const gsap = gsapModule.gsap
+      const { ScrollTrigger } = scrollTriggerModule
+      if (cancelled) return
+      gsap.registerPlugin(ScrollTrigger)
+      const isReduced = prefersReducedMotion()
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({ delay: 0.2 })
 
-      tl.fromTo(
-        subRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power2.out' },
-        '-=0.3'
-      )
+        // Title slams in
+        tl.fromTo(
+          titleRef.current,
+          { opacity: 0, y: isReduced ? 0 : 80, scaleY: isReduced ? 1 : 1.2 },
+          { opacity: 1, y: 0, scaleY: 1, duration: isReduced ? 0.2 : 0.8, ease: 'power4.out' }
+        )
 
-      // Scroll indicator
-      if (!isReduced) {
-        gsap.to(indicatorRef.current, {
-          y: 10,
-          duration: 1.2,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-      }
+        tl.fromTo(
+          subRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power2.out' },
+          '-=0.3'
+        )
 
-      // Parallax on scroll
-      if (!isReduced) {
-        gsap.to(titleRef.current, {
-          y: -100,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1,
-          },
-        })
-      }
-    }, heroRef)
+        // Scroll indicator
+        if (!isReduced) {
+          gsap.to(indicatorRef.current, {
+            y: 10,
+            duration: 1.2,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+          })
+        }
 
-    return () => ctx.revert()
+        // Parallax on scroll
+        if (!isReduced) {
+          gsap.to(titleRef.current, {
+            y: -100,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          })
+        }
+      }, heroRef)
+    })()
+
+    return () => {
+      cancelled = true
+      if (ctx) ctx.revert()
+    }
   }, [])
 
   return (
@@ -68,6 +78,7 @@ export function Hero() {
     >
       {/* Grid overlay — faint rave grid */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
           backgroundImage: `
@@ -79,7 +90,7 @@ export function Hero() {
       />
 
       {/* Radial glow — cyan core */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]"
           style={{
@@ -89,7 +100,7 @@ export function Hero() {
       </div>
 
       {/* Side EQ bars */}
-      <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 flex flex-col-reverse items-end gap-[2px]">
+      <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 flex flex-col-reverse items-end gap-[2px]" aria-hidden="true">
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={i}
@@ -122,6 +133,7 @@ export function Hero() {
       {/* Scroll */}
       <div
         ref={indicatorRef}
+        aria-hidden="true"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-light-muted">

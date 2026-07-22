@@ -43,7 +43,7 @@ export function Release() {
                 priority
               />
               {/* Neon corner accent */}
-              <div className="absolute top-0 right-0 w-16 h-16">
+              <div className="absolute top-0 right-0 w-16 h-16" aria-hidden="true">
                 <div
                   className="absolute top-0 right-0 w-full h-[2px]"
                   style={{ background: 'linear-gradient(270deg, var(--neon), transparent)' }}
