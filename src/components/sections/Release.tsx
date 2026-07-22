@@ -59,7 +59,7 @@ export function Release() {
           {/* Release info */}
           <div className="release-info flex-1 py-4 md:py-12">
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-neon mb-4">
-              MR-002 · 2024
+              MR-002 · 2025
             </div>
             <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.88] mb-2 uppercase">
               Ataraxia

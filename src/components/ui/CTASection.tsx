@@ -25,7 +25,7 @@ export function CTASection() {
             {Array.from({ length: 32 }).map((_, i) => (
               <div
                 key={i}
-                className="w-[3px] rounded-sm"
+                className="w-[3px]"
                 style={{
                   height: `${4 + Math.abs(Math.sin(i * 0.35)) * 36}px`,
                   backgroundColor: i % 8 === 0 ? 'var(--mag)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',

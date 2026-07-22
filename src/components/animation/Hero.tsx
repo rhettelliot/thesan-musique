@@ -81,7 +81,7 @@ export function Hero() {
       {/* Radial glow — cyan core */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]"
           style={{
             background: 'radial-gradient(circle, rgba(0,255,221,0.08) 0%, rgba(255,0,127,0.04) 40%, transparent 70%)',
           }}
@@ -93,7 +93,7 @@ export function Hero() {
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={i}
-            className="w-[2px] rounded-full"
+            className="w-[2px]"
             style={{
               height: `${6 + Math.abs(Math.sin(i * 0.4)) * 30}px`,
               backgroundColor: i % 5 === 0 ? 'var(--mag)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
