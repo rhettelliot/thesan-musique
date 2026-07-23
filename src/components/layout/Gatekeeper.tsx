@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '@/lib/motion'
 
 export function Gatekeeper() {
@@ -20,77 +19,12 @@ export function Gatekeeper() {
   const eqRef = useRef<HTMLDivElement>(null)
   const flashRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (entered) return
+  const gsapRef = useRef<typeof import('gsap').default | null>(null)
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleEnter()
-      }
-    }
+  const handleEnter = useCallback(() => {
+    const gsap = gsapRef.current
+    if (!gsap) return
 
-    window.addEventListener('keydown', handleKeyDown)
-
-    const isReduced = prefersReducedMotion()
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline()
-
-      if (eqRef.current) {
-        const bars = eqRef.current.children
-        tl.fromTo(
-          bars,
-          { scaleY: 0, opacity: 0 },
-          { scaleY: 1, opacity: 1, duration: isReduced ? 0.1 : 0.3, stagger: isReduced ? 0 : 0.03, ease: 'power2.out' },
-          0
-        )
-      }
-
-      tl.fromTo(
-        lineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power4.inOut' },
-        0.3
-      )
-
-      tl.fromTo(
-        titleTopRef.current,
-        { x: isReduced ? 0 : -80, opacity: 0 },
-        { x: 0, opacity: 1, duration: isReduced ? 0.2 : 0.5, ease: 'power4.out' },
-        0.5
-      )
-
-      tl.fromTo(
-        titleBottomRef.current,
-        { x: isReduced ? 0 : 80, opacity: 0 },
-        { x: 0, opacity: 1, duration: isReduced ? 0.2 : 0.5, ease: 'power4.out' },
-        0.6
-      )
-
-      tl.fromTo(
-        tagRef.current,
-        { opacity: 0, y: isReduced ? 0 : 15 },
-        { opacity: 1, y: 0, duration: isReduced ? 0.2 : 0.4, ease: 'power2.out' },
-        0.8
-      )
-
-      tl.fromTo(
-        btnRef.current,
-        { opacity: 0, y: isReduced ? 0 : 20 },
-        { opacity: 1, y: 0, duration: isReduced ? 0.2 : 0.4, ease: 'power2.out' },
-        0.9
-      )
-    }, containerRef)
-
-    return () => {
-      ctx.revert()
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [entered])
-
-  if (entered) return null
-
-  const handleEnter = () => {
     const isReduced = prefersReducedMotion()
     if (flashRef.current) {
       gsap.fromTo(
@@ -112,10 +46,94 @@ export function Gatekeeper() {
         setEntered(true)
       },
     })
-  }
+  }, [])
+
+  useEffect(() => {
+    if (entered) return
+
+    let cleanup = () => {}
+    let ctx: { revert: () => void } | undefined
+
+    const init = async () => {
+      const gsap = (await import('gsap')).default
+      gsapRef.current = gsap
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          handleEnter()
+        }
+      }
+      window.addEventListener('keydown', handleKeyDown)
+
+      cleanup = () => {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+
+      const isReduced = prefersReducedMotion()
+
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline()
+
+        if (eqRef.current) {
+          const bars = eqRef.current.children
+          tl.fromTo(
+            bars,
+            { scaleY: 0, opacity: 0 },
+            { scaleY: 1, opacity: 1, duration: isReduced ? 0.1 : 0.3, stagger: isReduced ? 0 : 0.03, ease: 'power2.out' },
+            0
+          )
+        }
+
+        tl.fromTo(
+          lineRef.current,
+          { scaleX: 0 },
+          { scaleX: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power4.inOut' },
+          0.3
+        )
+
+        tl.fromTo(
+          titleTopRef.current,
+          { x: isReduced ? 0 : -80, opacity: 0 },
+          { x: 0, opacity: 1, duration: isReduced ? 0.2 : 0.5, ease: 'power4.out' },
+          0.5
+        )
+
+        tl.fromTo(
+          titleBottomRef.current,
+          { x: isReduced ? 0 : 80, opacity: 0 },
+          { x: 0, opacity: 1, duration: isReduced ? 0.2 : 0.5, ease: 'power4.out' },
+          0.6
+        )
+
+        tl.fromTo(
+          tagRef.current,
+          { opacity: 0, y: isReduced ? 0 : 15 },
+          { opacity: 1, y: 0, duration: isReduced ? 0.2 : 0.4, ease: 'power2.out' },
+          0.8
+        )
+
+        tl.fromTo(
+          btnRef.current,
+          { opacity: 0, y: isReduced ? 0 : 20 },
+          { opacity: 1, y: 0, duration: isReduced ? 0.2 : 0.4, ease: 'power2.out' },
+          0.9
+        )
+      }, containerRef)
+    }
+
+    init()
+
+    return () => {
+      cleanup()
+      if (ctx) ctx.revert()
+    }
+  }, [entered, handleEnter])
+
+  if (entered) return null
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (prefersReducedMotion()) return
+    const gsap = gsapRef.current
+    if (!gsap || prefersReducedMotion()) return
     const btn = e.currentTarget
     const rect = btn.getBoundingClientRect()
     const x = e.clientX - rect.left - rect.width / 2
@@ -124,7 +142,8 @@ export function Gatekeeper() {
   }
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (prefersReducedMotion()) return
+    const gsap = gsapRef.current
+    if (!gsap || prefersReducedMotion()) return
     gsap.to(e.currentTarget, { x: 0, y: 0, duration: 0.4, ease: 'elastic.out(1, 0.5)' })
   }
 
@@ -178,7 +197,7 @@ export function Gatekeeper() {
           ref={tagRef}
           className="opacity-0 font-mono text-[10px] tracking-[0.35em] uppercase text-light-muted mt-4"
         >
-          Deep Dance · Techno · Drum & Bass
+          Deep Dance · Techno · Drum &amp; Bass
         </p>
 
         <button
