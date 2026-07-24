@@ -165,7 +165,7 @@ export function Hero() {
             className="w-[2px]"
             style={{
               height: `${6 + Math.abs(Math.sin(i * 0.4)) * 30}px`,
-              backgroundColor: i % 5 === 0 ? 'var(--mag)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
+              backgroundColor: i % 5 === 0 ? 'var(--signal-dim)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
               opacity: 0.4 + (i % 3) * 0.15,
             }}
           />

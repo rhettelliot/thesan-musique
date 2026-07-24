@@ -38,7 +38,7 @@ export function CTASection() {
                 className="w-[3px]"
                 style={{
                   height: `${4 + Math.abs(Math.sin(i * 0.35)) * 36}px`,
-                  backgroundColor: i % 8 === 0 ? 'var(--mag)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
+                  backgroundColor: i % 8 === 0 ? 'var(--signal-dim)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
                 }}
               />
             ))}

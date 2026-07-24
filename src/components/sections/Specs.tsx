@@ -4,9 +4,9 @@ import { useEffect, useRef } from 'react'
 import { revealOnEnter } from '@/lib/reveal'
 
 const specs = [
-  { label: '174', unit: 'BPM', color: 'var(--volt)', desc: 'Peak tempo' },
+  { label: '174', unit: 'BPM', color: 'var(--signal)', desc: 'Peak tempo' },
   { label: '4/4', unit: 'TIME', color: 'var(--neon)', desc: 'Structural pulse' },
-  { label: '140', unit: 'HZ', color: 'var(--mag)', desc: 'Sub frequency' },
+  { label: '140', unit: 'HZ', color: 'var(--signal-dim)', desc: 'Sub frequency' },
   { label: '∞', unit: 'SIGNAL', color: 'var(--neon)', desc: 'Output active' },
 ]
 

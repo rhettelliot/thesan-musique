@@ -65,7 +65,7 @@ export function Release() {
                 />
                 <div
                   className="absolute top-0 right-0 w-[2px] h-full"
-                  style={{ background: 'linear-gradient(180deg, var(--mag), transparent)' }}
+                  style={{ background: 'linear-gradient(180deg, var(--signal-dim), transparent)' }}
                 />
               </div>
               {/* Geometric rectangle mask corners */}
@@ -85,7 +85,7 @@ export function Release() {
             <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.88] mb-2 uppercase text-cream">
               Ataraxia
             </h2>
-            <p className="font-display text-xl md:text-2xl text-mag font-semibold mb-6">
+            <p className="font-display text-xl md:text-2xl text-neon font-semibold mb-6">
               Thesan Musique
             </p>
 
