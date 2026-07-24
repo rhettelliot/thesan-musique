@@ -31,6 +31,12 @@
   --volt: #A855F7;
 }
 
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -164,6 +170,21 @@ a:focus-visible.text-signal,
   opacity: 0.5;
 }
 .btn-snap { transition-property: color, background-color, border-color; }
+
+/* Spotlight border on track cards — mouse-driven radial cyan highlight */
+.track-card .spotlight {
+  background: transparent;
+  transition: background 0.15s ease-out, opacity 0.3s ease-out;
+  border: 1px solid transparent;
+}
+.track-card:hover .spotlight {
+  border-color: rgba(0,255,221,0.45);
+}
+
+/* Track number labels always in mono */
+.track-data-label {
+  font-family: var(--font-mono), monospace;
+}
 
 /* Anchored sections land below the fixed nav */
 section[id] {

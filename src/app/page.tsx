@@ -7,6 +7,7 @@ import { SmoothScroll } from '@/components/layout/SmoothScroll'
 import { Hero } from '@/components/animation/Hero'
 import { Specs } from '@/components/sections/Specs'
 import { Release } from '@/components/sections/Release'
+import { Tracks } from '@/components/sections/Tracks'
 import { Manifesto } from '@/components/sections/Manifesto'
 import { CTASection } from '@/components/ui/CTASection'
 import { Footer } from '@/components/layout/Footer'
@@ -41,6 +42,7 @@ export default function Home() {
             <Hero />
             <Specs />
             <Release />
+            <Tracks />
             <Manifesto />
             <CTASection />
           </main>

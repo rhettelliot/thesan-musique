@@ -7,6 +7,7 @@ export function Navigation() {
 
   const links = [
     { href: '#release', label: 'Release' },
+    { href: '#tracks', label: 'Tracks' },
     { href: '#manifesto', label: 'Manifesto' },
   ]
 

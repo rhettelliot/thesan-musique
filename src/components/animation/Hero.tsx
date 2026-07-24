@@ -8,6 +8,7 @@ export function Hero() {
   const titleRef = useRef<HTMLDivElement>(null)
   const subRef = useRef<HTMLDivElement>(null)
   const indicatorRef = useRef<HTMLDivElement>(null)
+  const flashRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let ctx: { revert: () => void } | undefined
@@ -21,21 +22,40 @@ export function Hero() {
       if (cancelled) return
       gsap.registerPlugin(ScrollTrigger)
       const isReduced = prefersReducedMotion()
+
       ctx = gsap.context(() => {
+        // Initial state from the CSS opacity-0 class is fine; GSAP handles the rest
         const tl = gsap.timeline({ delay: 0.2 })
 
-        // Title slams in
+        // Strobe flash fires before title lands
+        if (!isReduced && flashRef.current) {
+          gsap.set(flashRef.current, { opacity: 0.85 })
+          gsap.to(flashRef.current, {
+            opacity: 0,
+            duration: 0.55,
+            ease: 'steps(8)',
+          })
+        }
+
+        // Title flickers in with opacity steps
         tl.fromTo(
           titleRef.current,
           { opacity: 0, y: isReduced ? 0 : 80, scaleY: isReduced ? 1 : 1.2 },
-          { opacity: 1, y: 0, scaleY: 1, duration: isReduced ? 0.2 : 0.8, ease: 'power4.out' }
+          {
+            opacity: 1,
+            y: 0,
+            scaleY: 1,
+            duration: isReduced ? 0.2 : 0.65,
+            ease: 'steps(10)',
+          },
+          0.15
         )
 
         tl.fromTo(
           subRef.current,
           { opacity: 0 },
           { opacity: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power2.out' },
-          '-=0.3'
+          0.55
         )
 
         // Scroll indicator
@@ -76,6 +96,14 @@ export function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
+      {/* Strobe flash overlay on first load */}
+      <div
+        ref={flashRef}
+        className="absolute inset-0 z-20 pointer-events-none"
+        style={{ background: 'var(--neon)', mixBlendMode: 'screen', opacity: 0 }}
+        aria-hidden="true"
+      />
+
       {/* Grid overlay — faint rave grid */}
       <div
         aria-hidden="true"
@@ -115,19 +143,25 @@ export function Hero() {
       </div>
 
       {/* Title */}
-      <div ref={titleRef} className="relative z-10 text-center">
-        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
+      <div ref={titleRef} className="relative z-10 text-center opacity-0">
+        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase"
+        >
           <span className="block">Thesan</span>
           <span className="block text-neon text-neon-glow">Musique</span>
         </h1>
       </div>
 
       {/* Subtitle */}
-      <div ref={subRef} className="relative z-10 mt-6 text-center">
+      <div ref={subRef} className="relative z-10 mt-6 text-center opacity-0">
         <p className="font-mono text-[10px] tracking-[0.35em] uppercase text-light-muted">
           Deep Dance · Techno · Drum & Bass · MR-002
         </p>
         <div className="mt-4 bass-line w-40 mx-auto" />
+      </div>
+
+      {/* Silkscreen label */}
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10 font-mono text-[9px] tracking-[0.25em] uppercase text-signal border border-edge-subtle px-3 py-1">
+        TSM-008 // WAREHOUSE PROTOCOL
       </div>
 
       {/* Scroll */}
