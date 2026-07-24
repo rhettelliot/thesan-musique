@@ -4,9 +4,9 @@
 
 :root {
   --void: #000000;
-  --void-raised: #0A0A0A;
-  --void-elevated: #111111;
-  --void-subtle: #181818;
+  --void-raised: #0C0C0C;
+  --void-elevated: #141414;
+  --void-subtle: #1C1C1C;
 
   --signal: #00FFDD;
   --signal-dim: #00B29B;
@@ -30,9 +30,6 @@
 
   --neon: #00FFDD;
   --neon-glow: rgba(0,255,221,0.28);
-  --mag: #FF007F;
-  --mag-glow: rgba(255,0,127,0.28);
-  --volt: #A855F7;
 }
 
 @layer base {
@@ -106,6 +103,17 @@ body {
   background: var(--signal);
 }
 
+/* Gatekeeper EQ bars — vertical meter with looping pulse (delay set inline) */
+.eq-bar {
+  width: 3px;
+  transform-origin: bottom;
+  animation: eq-pulse 0.9s ease-in-out infinite alternate;
+}
+@keyframes eq-pulse {
+  from { transform: scaleY(0.4); }
+  to { transform: scaleY(1); }
+}
+
 /* Strobe flash overlay — single hard flash, no bloom */
 .strobe-flash {
   position: fixed;
@@ -155,18 +163,15 @@ a:focus-visible.text-signal,
 
 /* Utility aliases for legacy component tokens (map to design system signal) */
 .text-neon { color: var(--neon); }
-.text-mag { color: var(--mag); }
-.text-volt { color: var(--volt); }
 .border-neon { border-color: var(--neon); }
 .bg-neon { background-color: var(--neon); }
 .hover\:text-neon:hover { color: var(--neon); }
 .hover\:bg-neon:hover { background-color: var(--neon); }
 .hover\:text-void:hover { color: var(--void); }
 .text-neon-glow { text-shadow: 0 0 12px var(--neon-glow); }
-.text-mag-glow { text-shadow: 0 0 12px var(--mag-glow); }
 .bass-line {
   height: 2px;
-  background: linear-gradient(90deg, var(--neon), var(--mag), var(--neon));
+  background: var(--signal);
 }
 .divider-neon {
   height: 1px;

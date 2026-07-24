@@ -21,6 +21,12 @@ const config: Config = {
           DEFAULT: '#00FFDD',
           dim: '#00B29B',
         },
+        // Cream — primary text/ink. Maps to --cream* CSS vars.
+        cream: {
+          DEFAULT: '#ECE8D9',
+          dim: '#C9C5B8',
+          muted: '#8A877D',
+        },
         edge: {
           faint: 'rgba(255,255,255,0.06)',
           subtle: 'rgba(255,255,255,0.12)',

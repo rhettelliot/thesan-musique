@@ -162,7 +162,7 @@ export function Gatekeeper() {
         ref={lineRef}
         className="absolute top-1/2 left-0 right-0 h-[3px] origin-left"
         style={{
-          background: 'linear-gradient(90deg, transparent, var(--neon) 20%, var(--mag) 50%, var(--neon) 80%, transparent)',
+          background: 'linear-gradient(90deg, transparent, var(--neon) 20%, var(--neon) 50%, var(--neon) 80%, transparent)',
           boxShadow: '0 0 20px var(--neon-glow), 0 0 60px var(--neon-glow)',
         }}
       />
@@ -175,7 +175,7 @@ export function Gatekeeper() {
             style={{
               height: `${10 + Math.random() * 20}px`,
               animationDelay: `${i * 0.1}s`,
-              backgroundColor: i % 4 === 0 ? 'var(--mag)' : 'var(--neon)',
+              backgroundColor: i % 4 === 0 ? 'var(--signal-dim)' : 'var(--neon)',
             }}
           />
         ))}
@@ -213,16 +213,16 @@ export function Gatekeeper() {
         </button>
       </div>
 
-      <div className="absolute top-6 left-6 font-mono text-[9px] tracking-[0.15em] text-volt">
+      <div className="absolute top-6 left-6 font-mono text-[9px] tracking-[0.15em] text-light-muted">
         174 BPM
       </div>
       <div className="absolute top-6 right-6 font-mono text-[9px] tracking-[0.15em] text-neon animate-flicker">
         ● LIVE
       </div>
       <div className="absolute bottom-6 left-6 font-mono text-[9px] tracking-[0.15em] text-light-muted">
-        MR-002
+        MR-008
       </div>
-      <div className="absolute bottom-6 right-6 font-mono text-[9px] tracking-[0.15em] text-mag">
+      <div className="absolute bottom-6 right-6 font-mono text-[9px] tracking-[0.15em] text-light-muted">
         SEATTLE WA
       </div>
     </div>
