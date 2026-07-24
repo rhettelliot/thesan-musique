@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import '@/styles/globals.css'
-import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
+import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
@@ -14,7 +14,7 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 })
 
-const spaceGrotesk = Space_Grotesk({
+const spaceGroteskDisplay = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-display',
   weight: ['400', '500', '700'],
@@ -112,7 +112,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrains.variable} ${spaceGroteskDisplay.variable}`}>
       <body className="bg-void text-light antialiased">
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <script

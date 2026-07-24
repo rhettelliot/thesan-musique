@@ -91,7 +91,7 @@ export function Tracks() {
     <section
       ref={sectionRef}
       id="tracks"
-      className="relative bg-void h-screen overflow-hidden"
+      className="relative bg-void min-h-[100dvh] overflow-hidden"
       aria-label="Ataraxia tracklist"
     >
       {/* Pin spacer ghost */}
