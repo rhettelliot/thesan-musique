@@ -23,8 +23,8 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'Thesan Musique — Ataraxia | Warehouse Bass — Deep Dance / Techno / DnB',
-  description: 'Warehouse bass. Deep dance, techno, and drum & bass from Thesan Musique. Ataraxia — nine tracks of tranquility under pressure. Manteis Recordings, 2025.',
-  keywords: ['Thesan Musique', 'Ataraxia', 'warehouse bass', 'deep dance', 'techno', 'drum and bass', 'DnB', 'electronic music', 'Manteis Recordings', 'Seattle electronic'],
+  description: 'Warehouse bass. Deep dance, techno, and drum & bass from Thesan Musique. Ataraxia — nine tracks of tranquility under pressure. Manteis Recordings MR-008, 2025.',
+  keywords: ['Thesan Musique', 'Ataraxia', 'warehouse bass', 'deep dance', 'techno', 'drum and bass', 'DnB', 'electronic music', 'Manteis Recordings', 'Seattle electronic', 'MR-008'],
   authors: [{ name: 'Thesan Musique' }],
   creator: 'Thesan Musique',
   publisher: 'Manteis Recordings',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Thesan Musique — Ataraxia',
-    description: 'Warehouse bass. Deep Dance / Techno / DnB — Manteis Recordings, 2025',
+    description: 'Warehouse bass. Deep Dance / Techno / DnB — Manteis Recordings MR-008, 2025',
     type: 'website',
     url: 'https://thesan-musique-site.vercel.app',
     siteName: 'Thesan Musique',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Thesan Musique — Ataraxia',
-    description: 'Warehouse bass. Deep Dance / Techno / DnB — Manteis Recordings, 2025',
+    description: 'Warehouse bass. Deep Dance / Techno / DnB — Manteis Recordings MR-008, 2025',
     images: ['/og.jpg'],
   },
   robots: { index: true, follow: true },
@@ -78,7 +78,7 @@ const jsonLd = {
   },
   albumProductionType: 'https://schema.org/StudioAlbum',
   albumReleaseType: 'https://schema.org/AlbumRelease',
-  catalogNumber: 'MR-002',
+  catalogNumber: 'MR-008',
   datePublished: '2025',
   numTracks: 9,
   genre: ['Deep Dance', 'Techno', 'Drum & Bass', 'Electronic'],

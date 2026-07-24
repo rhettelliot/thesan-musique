@@ -24,7 +24,6 @@ export function Hero() {
       const isReduced = prefersReducedMotion()
 
       ctx = gsap.context(() => {
-        // Initial state from the CSS opacity-0 class is fine; GSAP handles the rest
         const tl = gsap.timeline({ delay: 0.2 })
 
         // Strobe flash fires before title lands
@@ -104,31 +103,62 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Grid overlay — faint rave grid */}
+      {/* Continuous strobe-flicker overlay */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        className="absolute inset-0 z-[18] pointer-events-none strobe-cycle"
+        style={{ background: 'var(--neon)', mixBlendMode: 'overlay', opacity: 0 }}
+      />
+
+      {/* Wireframe grid tunnel — perspective plane */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-0 right-0 h-[75vh] z-[1] wireframe-tunnel tunnel-pulse"
+        style={{ backgroundSize: '70px 70px' }}
+      />
+
+      {/* Topographic warehouse floor plan contours */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-[45vh] z-[2] topo-overlay"
+      />
+
+      {/* Visible structural grid skeleton */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-[3] opacity-30"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(0,255,221,0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,255,221,0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
+          backgroundImage: `linear-gradient(rgba(236,232,217,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(236,232,217,0.04) 1px, transparent 1px)`,
+          backgroundSize: '120px 120px',
         }}
       />
 
+      {/* Geometric rectangular masks */}
+      <div
+        aria-hidden="true"
+        className="absolute top-[12%] left-[8%] w-[18%] h-[32%] border border-edge-subtle z-[3] opacity-40"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute bottom-[18%] right-[6%] w-[22%] h-[24%] border border-edge-subtle z-[3] opacity-30"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute top-[22%] right-[12%] w-[8%] h-[8%] border border-neon z-[3] opacity-20"
+      />
+
       {/* Radial glow — cyan core */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div className="absolute inset-0 pointer-events-none z-[4]" aria-hidden="true">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]"
           style={{
-            background: 'radial-gradient(circle, rgba(0,255,221,0.08) 0%, rgba(255,0,127,0.04) 40%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0,255,221,0.06) 0%, rgba(255,0,127,0.03) 40%, transparent 70%)',
           }}
         />
       </div>
 
       {/* Side EQ bars */}
-      <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 flex flex-col-reverse items-end gap-[2px]" aria-hidden="true">
+      <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 flex flex-col-reverse items-end gap-[2px] z-10" aria-hidden="true">
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={i}
@@ -142,11 +172,20 @@ export function Hero() {
         ))}
       </div>
 
+      {/* MASSIVE catalog number MR-008 art */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center z-[4] pointer-events-none"
+      >
+        <span className="catalog-massive text-[22vw] md:text-[20vw] font-bold uppercase">
+          MR-008
+        </span>
+      </div>
+
       {/* Title */}
       <div ref={titleRef} className="relative z-10 text-center opacity-0">
-        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase"
-        >
-          <span className="block">Thesan</span>
+        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
+          <span className="block text-cream">Thesan</span>
           <span className="block text-neon text-neon-glow">Musique</span>
         </h1>
       </div>
@@ -154,21 +193,26 @@ export function Hero() {
       {/* Subtitle */}
       <div ref={subRef} className="relative z-10 mt-6 text-center opacity-0">
         <p className="font-mono text-[10px] tracking-[0.35em] uppercase text-light-muted">
-          Deep Dance · Techno · Drum & Bass · MR-002
+          Deep Dance · Techno · Drum & Bass · MR-008
         </p>
         <div className="mt-4 bass-line w-40 mx-auto" />
       </div>
 
-      {/* Silkscreen label */}
-      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10 font-mono text-[9px] tracking-[0.25em] uppercase text-signal border border-edge-subtle px-3 py-1">
-        TSM-008 // WAREHOUSE PROTOCOL
+      {/* Stamp badge texture for label */}
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
+        <div className="relative border border-edge-subtle px-4 py-2 overflow-hidden">
+          <div className="absolute inset-0 stamp-texture stamp-jitter" aria-hidden="true" />
+          <span className="relative font-mono text-[9px] tracking-[0.25em] uppercase text-cream-dim">
+            TSM-008 // WAREHOUSE PROTOCOL
+          </span>
+        </div>
       </div>
 
       {/* Scroll */}
       <div
         ref={indicatorRef}
         aria-hidden="true"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-light-muted">
           Drop

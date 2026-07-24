@@ -19,7 +19,7 @@ export function Navigation() {
           <a href="#" aria-label="Thesan Musique home" className="font-display text-lg font-bold tracking-[-0.02em] uppercase">
             <span className="text-neon text-neon-glow">TM</span>
             <span className="text-light-muted font-mono text-[9px] tracking-[0.15em] ml-2 hidden md:inline">
-              MR-002
+              MR-008
             </span>
           </a>
 
@@ -38,10 +38,10 @@ export function Navigation() {
               href="https://distrokid.com/hyperfollow/thesanmusique/ataraxia"
               target="_blank"
               rel="noreferrer noopener"
-              className="font-mono text-[10px] tracking-[0.2em] uppercase text-neon border border-neon px-4 py-2 btn-snap hover:bg-neon hover:text-void transition-colors duration-200"
+              className="relative font-mono text-[10px] tracking-[0.2em] uppercase text-neon border border-neon px-4 py-2 btn-snap hover:bg-neon hover:text-void transition-colors duration-200 overflow-hidden"
               style={{ boxShadow: '0 0 8px rgba(0,255,221,0.1)' }}
             >
-              Listen
+              <span className="relative z-10">Listen</span>
             </a>
           </div>
 

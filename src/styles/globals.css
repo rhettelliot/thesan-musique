@@ -4,21 +4,25 @@
 
 :root {
   --void: #000000;
-  --void-raised: #0C0C0C;
-  --void-elevated: #141414;
-  --void-subtle: #1C1C1C;
+  --void-raised: #0A0A0A;
+  --void-elevated: #111111;
+  --void-subtle: #181818;
 
   --signal: #00FFDD;
   --signal-dim: #00B29B;
 
-  --edge-faint: rgba(255,255,255,0.06);
-  --edge-subtle: rgba(255,255,255,0.12);
-  --edge-medium: rgba(255,255,255,0.2);
-  --edge-bright: rgba(255,255,255,0.35);
+  --cream: #ECE8D9;
+  --cream-dim: #C9C5B8;
+  --cream-muted: #8A877D;
 
-  --light: #F0F0F0;
-  --light-dim: #A6A6A6;
-  --light-muted: #767676;
+  --edge-faint: rgba(236,232,217,0.07);
+  --edge-subtle: rgba(236,232,217,0.14);
+  --edge-medium: rgba(236,232,217,0.22);
+  --edge-bright: rgba(236,232,217,0.38);
+
+  --light: #ECE8D9;
+  --light-dim: #C9C5B8;
+  --light-muted: #8A877D;
 
   --ease-cinematic: cubic-bezier(0.45, 0.05, 0.55, 0.95);
   --ease-enter: cubic-bezier(0, 0, 0.25, 1);
@@ -52,7 +56,7 @@ html {
 
 body {
   background: var(--void);
-  color: var(--light);
+  color: var(--cream);
   overflow-x: hidden;
 }
 
@@ -80,7 +84,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
@@ -132,7 +136,7 @@ body {
 /* Signal text must meet WCAG 4.5:1 on #000000 (10px-13px labels are small text) */
 .text-signal,
 [data-signal] {
-  color: #FF4D9E;
+  color: var(--signal);
 }
 
 /* Hover/focus state for signal text */
@@ -140,7 +144,7 @@ a:hover.text-signal,
 a:focus-visible.text-signal,
 [data-signal]:hover,
 [data-signal]:focus-visible {
-  color: #00FFDD;
+  color: var(--signal);
 }
 
 /* Focus-visible outline override for browsers that need explicit target */
@@ -211,4 +215,156 @@ section[id] {
   top: 1rem;
   outline: 2px solid var(--signal);
   outline-offset: 2px;
+}
+
+/* ===== WAREHOUSE TECHNO ART PATTERNS ===== */
+
+/* Wireframe tunnel grid — perspective plane used in Hero */
+.wireframe-tunnel {
+  background-image:
+    linear-gradient(rgba(0,255,221,0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,221,0.28) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: perspective(900px) rotateX(60deg);
+  transform-origin: center top;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+}
+
+/* Topographic contour lines — warehouse floor plan feel */
+.topo-overlay {
+  background-image:
+    repeating-radial-gradient(
+      circle at 50% 100%,
+      transparent 0,
+      transparent 24px,
+      rgba(0,255,221,0.09) 24px,
+      rgba(0,255,221,0.09) 25px,
+      transparent 26px
+    );
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0) 100%);
+}
+
+/* Visible structural grid lines */
+.grid-skeleton {
+  background-image:
+    linear-gradient(rgba(236,232,217,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236,232,217,0.09) 1px, transparent 1px);
+  background-size: 100% 100%;
+}
+
+/* Scanline overlay on track cards */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,255,221,0.06) 3px,
+    rgba(0,255,221,0.06) 4px
+  );
+  pointer-events: none;
+}
+
+/* Stamp texture for Manteis label */
+.stamp-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+}
+
+/* Geometric rectangular mask */
+.rect-mask {
+  clip-path: inset(0);
+}
+
+/* Mono metadata strip for tracks */
+.meta-strip {
+  border-top: 1px solid rgba(0,255,221,0.18);
+  border-bottom: 1px solid rgba(0,255,221,0.18);
+  background: linear-gradient(90deg, rgba(0,255,221,0.04), rgba(0,255,221,0.0) 60%);
+}
+
+/* Glowing connecting line between tracks */
+.connector-line {
+  stroke: rgba(0,255,221,0.55);
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
+  filter: drop-shadow(0 0 3px rgba(0,255,221,0.55));
+}
+
+/* Massive catalog number MR-008 art */
+.catalog-massive {
+  font-family: var(--font-mono), monospace;
+  color: rgba(236,232,217,0.08);
+  -webkit-text-stroke: 1px rgba(0,255,221,0.18);
+  letter-spacing: -0.06em;
+  line-height: 0.82;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Data readout tick animation helper */
+.data-tick {
+  animation: data-tick 1.2s steps(1, end) infinite;
+}
+
+/* Strobe overlay for continuous atmospheric flicker */
+.strobe-cycle {
+  animation: strobe-cycle 3.2s steps(1, end) infinite;
+}
+
+/* Tunnel pulse for hero wireframe */
+.tunnel-pulse {
+  animation: tunnel-pulse 8s ease-in-out infinite;
+}
+
+/* Connector pulse between track cards */
+.pulse-connector {
+  animation: pulse-connector 2.4s ease-in-out infinite;
+}
+
+/* Stamp jitter — sub-pixel print imperfection */
+.stamp-jitter {
+  animation: stamp-jitter 0.35s steps(2, end) infinite;
+}
+
+@keyframes strobe-cycle {
+  0%, 100% { opacity: 0.0; }
+  5% { opacity: 0.7; }
+  8% { opacity: 0.0; }
+  12% { opacity: 0.45; }
+  15% { opacity: 0.0; }
+  22% { opacity: 0.6; }
+  26% { opacity: 0.0; }
+  40% { opacity: 0.2; }
+  45% { opacity: 0.0; }
+  60% { opacity: 0.35; }
+  68% { opacity: 0.0; }
+  80% { opacity: 0.15; }
+  90% { opacity: 0.0; }
+}
+
+@keyframes tunnel-pulse {
+  0% { transform: scale(0.96) perspective(900px) translateZ(-140px); opacity: 0.35; }
+  50% { transform: scale(1.02) perspective(900px) translateZ(0px); opacity: 0.55; }
+  100% { transform: scale(0.96) perspective(900px) translateZ(-140px); opacity: 0.35; }
+}
+
+@keyframes data-tick {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-connector {
+  0%, 100% { opacity: 0.15; stroke-dashoffset: 0; }
+  50% { opacity: 0.55; stroke-dashoffset: -20; }
+}
+
+@keyframes stamp-jitter {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-0.5px, 0.5px); }
+  50% { transform: translate(0.5px, -0.5px); }
+  75% { transform: translate(-0.5px, -0.5px); }
 }

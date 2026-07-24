@@ -27,8 +27,18 @@ export function Manifesto() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="manifesto" className="py-32 md:py-48">
-      <div className="max-w-5xl mx-auto px-6 md:px-12">
+    <section ref={sectionRef} id="manifesto" className="py-32 md:py-48 relative">
+      {/* Geometric rectangular grid overlay */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none opacity-10"
+        style={{
+          backgroundImage: `linear-gradient(rgba(236,232,217,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(236,232,217,0.04) 1px, transparent 1px)`,
+          backgroundSize: '180px 180px',
+        }}
+      />
+
+      <div className="relative max-w-5xl mx-auto px-6 md:px-12">
         <div className="section-label mb-20">Manifesto /</div>
 
         <div className="space-y-6 md:space-y-8">
@@ -42,7 +52,7 @@ export function Manifesto() {
                     ? 'font-bold text-mag text-mag-glow'
                     : i === manifesto.length - 2
                       ? 'text-light-dim'
-                      : 'text-light'
+                      : 'text-cream'
               }`}
             >
               {line}
