@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Gatekeeper } from '@/components/layout/Gatekeeper'
 import { Navigation } from '@/components/layout/Navigation'
 import { SmoothScroll } from '@/components/layout/SmoothScroll'
+import { StrobeOverlay } from '@/components/layout/StrobeOverlay'
 import { Hero } from '@/components/animation/Hero'
 import { Specs } from '@/components/sections/Specs'
 import { Release } from '@/components/sections/Release'
@@ -33,6 +34,7 @@ export default function Home() {
   return (
     <>
       <Gatekeeper />
+      <StrobeOverlay />
       {entered && (
         <SmoothScroll>
           <header>

@@ -190,6 +190,15 @@ a:focus-visible.text-signal,
   border-color: rgba(0,255,221,0.45);
 }
 
+/* Chroma gradient border for bento cards */
+.chroma-border {
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  border-radius: 0;
+}
+
 /* Track number labels always in mono */
 .track-data-label {
   font-family: var(--font-mono), monospace;
