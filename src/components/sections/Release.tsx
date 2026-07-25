@@ -41,7 +41,7 @@ export function Release() {
               className="relative aspect-square overflow-hidden rect-mask"
               style={{
                 border: '1px solid var(--edge-faint)',
-                boxShadow: '0 0 60px rgba(0,255,221,0.08), 0 0 120px rgba(255,0,127,0.06)',
+                boxShadow: '0 0 60px rgba(0,255,221,0.08), 0 0 120px rgba(0,255,221,0.04)',
               }}
             >
               <Image

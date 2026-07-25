@@ -152,7 +152,7 @@ export function Hero() {
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]"
           style={{
-            background: 'radial-gradient(circle, rgba(0,255,221,0.06) 0%, rgba(255,0,127,0.03) 40%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0,255,221,0.07) 0%, rgba(0,255,221,0.025) 40%, transparent 70%)',
           }}
         />
       </div>

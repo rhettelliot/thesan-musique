@@ -27,16 +27,20 @@ const config: Config = {
           dim: '#C9C5B8',
           muted: '#8A877D',
         },
+        // Edges carved in cream, not white — matches the --edge-* CSS vars so
+        // Tailwind `border-edge-*` and the raw vars stay a single source of truth.
         edge: {
-          faint: 'rgba(255,255,255,0.06)',
-          subtle: 'rgba(255,255,255,0.12)',
-          medium: 'rgba(255,255,255,0.2)',
-          bright: 'rgba(255,255,255,0.35)',
+          faint: 'rgba(236,232,217,0.07)',
+          subtle: 'rgba(236,232,217,0.14)',
+          medium: 'rgba(236,232,217,0.22)',
+          bright: 'rgba(236,232,217,0.38)',
         },
+        // `light` is the cream ink scale — aliased to --cream* so `text-light-*`
+        // and `text-cream-*` never diverge (muted clears WCAG AA on #000000).
         light: {
-          DEFAULT: '#F0F0F0',
-          dim: '#A6A6A6',
-          muted: '#767676',
+          DEFAULT: '#ECE8D9',
+          dim: '#C9C5B8',
+          muted: '#8A877D',
         },
       },
       fontFamily: {
