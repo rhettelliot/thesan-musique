@@ -27,9 +27,6 @@
   --ease-cinematic: cubic-bezier(0.45, 0.05, 0.55, 0.95);
   --ease-enter: cubic-bezier(0, 0, 0.25, 1);
   --ease-exit: cubic-bezier(0.75, 0, 1, 1);
-
-  --neon: #00FFDD;
-  --neon-glow: rgba(0,255,221,0.28);
 }
 
 @layer base {
@@ -75,7 +72,7 @@ body {
   background: var(--signal);
 }
 
-/* Film grain — the only texture. Atmosphere, not decoration. */
+/* Subtle film grain texture overlay */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -86,7 +83,7 @@ body {
   background-repeat: repeat;
 }
 
-/* Silkscreen section label — hardware faceplate etching */
+/* Silkscreen section label */
 .section-label {
   @apply font-mono text-[10px] font-bold tracking-[0.3em] uppercase text-signal;
 }
@@ -97,31 +94,10 @@ body {
   background: var(--edge-subtle);
 }
 
-/* Signal rule — solid, no glow. Light is information. */
+/* Signal rule */
 .rule-signal {
   height: 2px;
   background: var(--signal);
-}
-
-/* Gatekeeper EQ bars — vertical meter with looping pulse (delay set inline) */
-.eq-bar {
-  width: 3px;
-  transform-origin: bottom;
-  animation: eq-pulse 0.9s ease-in-out infinite alternate;
-}
-@keyframes eq-pulse {
-  from { transform: scaleY(0.4); }
-  to { transform: scaleY(1); }
-}
-
-/* Strobe flash overlay — single hard flash, no bloom */
-.strobe-flash {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
-  background: var(--light);
-  opacity: 0;
 }
 
 /* Reduced motion */
@@ -135,19 +111,18 @@ body {
   }
 }
 
-/* Keyboard navigation — signal outline, only for keyboard focus */
+/* Keyboard navigation — signal outline */
 :focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
 }
 
-/* Signal text must meet WCAG 4.5:1 on #000000 (10px-13px labels are small text) */
+/* Signal text on dark */
 .text-signal,
 [data-signal] {
   color: var(--signal);
 }
 
-/* Hover/focus state for signal text */
 a:hover.text-signal,
 a:focus-visible.text-signal,
 [data-signal]:hover,
@@ -155,61 +130,12 @@ a:focus-visible.text-signal,
   color: var(--signal);
 }
 
-/* Focus-visible outline override for browsers that need explicit target */
-*:focus-visible {
-  outline: 2px solid var(--signal);
-  outline-offset: 2px;
-}
-
-/* Utility aliases for legacy component tokens (map to design system signal) */
-.text-neon { color: var(--neon); }
-.border-neon { border-color: var(--neon); }
-.bg-neon { background-color: var(--neon); }
-.hover\:text-neon:hover { color: var(--neon); }
-.hover\:bg-neon:hover { background-color: var(--neon); }
-.hover\:text-void:hover { color: var(--void); }
-.text-neon-glow { text-shadow: 0 0 12px var(--neon-glow); }
-.bass-line {
-  height: 2px;
-  background: var(--signal);
-}
-.divider-neon {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon), transparent);
-  opacity: 0.5;
-}
-.btn-snap { transition-property: color, background-color, border-color; }
-
-/* Spotlight border on track cards — mouse-driven radial cyan highlight */
-.track-card .spotlight {
-  background: transparent;
-  transition: background 0.15s ease-out, opacity 0.3s ease-out;
-  border: 1px solid transparent;
-}
-.track-card:hover .spotlight {
-  border-color: rgba(0,255,221,0.45);
-}
-
-/* Chroma gradient border for bento cards */
-.chroma-border {
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 1px;
-  border-radius: 0;
-}
-
-/* Track number labels always in mono */
-.track-data-label {
-  font-family: var(--font-mono), monospace;
-}
-
 /* Anchored sections land below the fixed nav */
 section[id] {
   scroll-margin-top: 88px;
 }
 
-/* Skip link - first focusable element for keyboard users */
+/* Skip link */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -231,154 +157,13 @@ section[id] {
   outline-offset: 2px;
 }
 
-/* ===== WAREHOUSE TECHNO ART PATTERNS ===== */
-
-/* Wireframe tunnel grid — perspective plane used in Hero */
-.wireframe-tunnel {
-  background-image:
-    linear-gradient(rgba(0,255,221,0.28) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,221,0.28) 1px, transparent 1px);
-  background-size: 80px 80px;
-  transform: perspective(900px) rotateX(60deg);
-  transform-origin: center top;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
-}
-
-/* Topographic contour lines — warehouse floor plan feel */
-.topo-overlay {
-  background-image:
-    repeating-radial-gradient(
-      circle at 50% 100%,
-      transparent 0,
-      transparent 24px,
-      rgba(0,255,221,0.09) 24px,
-      rgba(0,255,221,0.09) 25px,
-      transparent 26px
-    );
-  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0) 100%);
-}
-
-/* Visible structural grid lines */
-.grid-skeleton {
-  background-image:
-    linear-gradient(rgba(236,232,217,0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(236,232,217,0.09) 1px, transparent 1px);
-  background-size: 100% 100%;
-}
-
-/* Scanline overlay on track cards */
-.scanlines {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0,255,221,0.06) 3px,
-    rgba(0,255,221,0.06) 4px
-  );
-  pointer-events: none;
-}
-
-/* Stamp texture for Manteis label */
-.stamp-texture {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-  mix-blend-mode: overlay;
-  opacity: 0.35;
-}
-
-/* Geometric rectangular mask */
-.rect-mask {
-  clip-path: inset(0);
-}
-
-/* Mono metadata strip for tracks */
-.meta-strip {
-  border-top: 1px solid rgba(0,255,221,0.18);
-  border-bottom: 1px solid rgba(0,255,221,0.18);
-  background: linear-gradient(90deg, rgba(0,255,221,0.04), rgba(0,255,221,0.0) 60%);
-}
-
-/* Glowing connecting line between tracks */
-.connector-line {
-  stroke: rgba(0,255,221,0.55);
-  stroke-width: 1;
-  stroke-dasharray: 6 4;
-  filter: drop-shadow(0 0 3px rgba(0,255,221,0.55));
-}
-
-/* Massive catalog number MR-008 art */
+/* Massive catalog number watermark */
 .catalog-massive {
   font-family: var(--font-mono), monospace;
-  color: rgba(236,232,217,0.08);
-  -webkit-text-stroke: 1px rgba(0,255,221,0.18);
+  color: rgba(236,232,217,0.06);
+  -webkit-text-stroke: 1px rgba(236,232,217,0.08);
   letter-spacing: -0.06em;
   line-height: 0.82;
   user-select: none;
   pointer-events: none;
-}
-
-/* Data readout tick animation helper */
-.data-tick {
-  animation: data-tick 1.2s steps(1, end) infinite;
-}
-
-/* Strobe overlay for continuous atmospheric flicker */
-.strobe-cycle {
-  animation: strobe-cycle 3.2s steps(1, end) infinite;
-}
-
-/* Tunnel pulse for hero wireframe */
-.tunnel-pulse {
-  animation: tunnel-pulse 8s ease-in-out infinite;
-}
-
-/* Connector pulse between track cards */
-.pulse-connector {
-  animation: pulse-connector 2.4s ease-in-out infinite;
-}
-
-/* Stamp jitter — sub-pixel print imperfection */
-.stamp-jitter {
-  animation: stamp-jitter 0.35s steps(2, end) infinite;
-}
-
-@keyframes strobe-cycle {
-  0%, 100% { opacity: 0.0; }
-  5% { opacity: 0.7; }
-  8% { opacity: 0.0; }
-  12% { opacity: 0.45; }
-  15% { opacity: 0.0; }
-  22% { opacity: 0.6; }
-  26% { opacity: 0.0; }
-  40% { opacity: 0.2; }
-  45% { opacity: 0.0; }
-  60% { opacity: 0.35; }
-  68% { opacity: 0.0; }
-  80% { opacity: 0.15; }
-  90% { opacity: 0.0; }
-}
-
-@keyframes tunnel-pulse {
-  0% { transform: scale(0.96) perspective(900px) translateZ(-140px); opacity: 0.35; }
-  50% { transform: scale(1.02) perspective(900px) translateZ(0px); opacity: 0.55; }
-  100% { transform: scale(0.96) perspective(900px) translateZ(-140px); opacity: 0.35; }
-}
-
-@keyframes data-tick {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-@keyframes pulse-connector {
-  0%, 100% { opacity: 0.15; stroke-dashoffset: 0; }
-  50% { opacity: 0.55; stroke-dashoffset: -20; }
-}
-
-@keyframes stamp-jitter {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-0.5px, 0.5px); }
-  50% { transform: translate(0.5px, -0.5px); }
-  75% { transform: translate(-0.5px, -0.5px); }
 }

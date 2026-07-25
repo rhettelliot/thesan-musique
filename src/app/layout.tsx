@@ -119,21 +119,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <noscript>
-          <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000000', color: '#00FFDD', fontFamily: 'monospace', fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', textAlign: 'center', padding: 24 }}>
-            Thesan Musique is an interactive experience — enable JavaScript to enter.
-          </div>
-        </noscript>
         <div className="noise-overlay" />
         {children}
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            setTimeout(function() {
-              var els = document.querySelectorAll('main [style*="opacity: 0"], main [style*="opacity:0"]');
-              els.forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'none'; });
-            }, 4000);
-          })();
-        `}} />
       </body>
     </html>
   )

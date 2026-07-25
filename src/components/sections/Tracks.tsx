@@ -31,7 +31,6 @@ export function Tracks() {
   const railRef = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
 
-  // Physics state
   const posRef = useRef({ x: 0, v: 0 })
   const draggingRef = useRef(false)
   const startRef = useRef({ x: 0, scroll: 0, t: 0 })
@@ -65,7 +64,6 @@ export function Tracks() {
       const nextV = v * friction
       const finalX = x + nextV
 
-      // Boundary spring
       let finalV = nextV
       if (finalX > 0) {
         finalV += -finalX * 0.12
@@ -105,7 +103,6 @@ export function Tracks() {
   useEffect(() => {
     if (prefersReducedMotion()) return
 
-    // Wheel hijack with momentum physics
     const viewport = viewportRef.current
     const section = sectionRef.current
     if (!viewport || !section) return
@@ -132,7 +129,6 @@ export function Tracks() {
         onUpdate: (self) => {
           if (!draggingRef.current) {
             const target = -self.progress * dimsRef.current.max
-            // Let the GSAP-driven position act as a soft target rather than hard set
             posRef.current.x = lerp(posRef.current.x, target, 0.18)
             posRef.current.v = 0
             apply(posRef.current.x)
@@ -145,7 +141,6 @@ export function Tracks() {
         const inView = self.isActive
         if (!inView) return
 
-        // Compute bounds and decide whether to consume wheel
         const { max } = dimsRef.current
         const atStart = posRef.current.x >= -1
         const atEnd = posRef.current.x <= -max + 1
@@ -171,7 +166,6 @@ export function Tracks() {
     }
   }, [apply, updateDims])
 
-  // Drag / swipe physics
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     draggingRef.current = true
     startRef.current = { x: e.clientX, scroll: posRef.current.x, t: performance.now() }
@@ -185,7 +179,6 @@ export function Tracks() {
     const dx = e.clientX - startRef.current.x
     let nextX = startRef.current.scroll + dx
 
-    // Rubber-band at edges
     const { max } = dimsRef.current
     if (nextX > 0) nextX = nextX * 0.35
     else if (nextX < -max) nextX = -max + (nextX + max) * 0.35
@@ -201,9 +194,7 @@ export function Tracks() {
   const onPointerUp = useCallback(() => {
     draggingRef.current = false
     const { max } = dimsRef.current
-    // Momentum throw with friction from current velocity
     posRef.current.v = clamp(posRef.current.v * 0.8, -120, 120)
-    // If near edge, spring back
     if (posRef.current.x > 0) posRef.current.v += -posRef.current.x * 0.15
     if (posRef.current.x < -max) posRef.current.v += (-max - posRef.current.x) * 0.15
   }, [])
@@ -215,27 +206,6 @@ export function Tracks() {
       className="relative bg-void min-h-[100dvh] overflow-hidden select-none"
       aria-label="Ataraxia tracklist"
     >
-      {/* Cockpit structural grid background */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none z-0 grid-skeleton"
-        style={{ backgroundSize: '160px 160px', opacity: 0.25 }}
-      />
-
-      {/* Chroma gradient grid overlay */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none z-[1] opacity-30"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(0,255,221,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,221,0.08) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(ellipse at 50% 0%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 50% 0%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
-        }}
-      />
-
-      {/* Top catalog strip */}
       <div className="absolute top-6 left-6 right-6 z-20 flex items-center justify-between">
         <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-signal">
           TSM-008 // WAREHOUSE PROTOCOL
@@ -245,7 +215,6 @@ export function Tracks() {
         </span>
       </div>
 
-      {/* Kinetic BPM marquee */}
       <div className="absolute top-16 left-0 right-0 z-20 overflow-hidden border-y border-edge-subtle py-2">
         <div
           className="whitespace-nowrap"
@@ -270,7 +239,6 @@ export function Tracks() {
         </div>
       </div>
 
-      {/* Massive watermark */}
       <div
         aria-hidden="true"
         className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[1] pointer-events-none"
@@ -278,7 +246,6 @@ export function Tracks() {
         <span className="catalog-massive text-[38vw] md:text-[30vw]">MR-008</span>
       </div>
 
-      {/* Horizontal drag viewport */}
       <div
         ref={viewportRef}
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[68vh] min-h-[420px] overflow-hidden z-10 cursor-grab active:cursor-grabbing touch-pan-y"
@@ -292,13 +259,12 @@ export function Tracks() {
           className="flex h-full will-change-transform"
           style={{ transform: 'translate3d(0,0,0)' }}
         >
-          {tracks.map((track, i) => (
-            <TrackCard key={track.name} track={track} index={i} />
+          {tracks.map((track) => (
+            <TrackCard key={track.name} track={track} />
           ))}
         </div>
       </div>
 
-      {/* Progress indicator */}
       <div className="absolute bottom-8 left-6 right-6 z-20 flex items-center gap-4">
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-light-muted">
           {String(Math.round(progress * 100)).padStart(2, '0')}%
@@ -317,129 +283,25 @@ export function Tracks() {
   )
 }
 
-function TrackCard({ track, index }: { track: typeof tracks[0]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const tiltRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
-  const rafRef = useRef<number | null>(null)
-  const [spotlight, setSpotlight] = useState({ x: 50, y: 50, active: false })
-
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    const card = cardRef.current
-    if (!card) return
-
-    let active = true
-    const smooth = () => {
-      if (!active) return
-      tiltRef.current.x = lerp(tiltRef.current.x, tiltRef.current.tx, 0.12)
-      tiltRef.current.y = lerp(tiltRef.current.y, tiltRef.current.ty, 0.12)
-      card.style.transform = `perspective(900px) rotateX(${tiltRef.current.y}deg) rotateY(${tiltRef.current.x}deg)`
-      rafRef.current = requestAnimationFrame(smooth)
-    }
-
-    const onMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect()
-      const px = (e.clientX - rect.left) / rect.width
-      const py = (e.clientY - rect.top) / rect.height
-      tiltRef.current.tx = (px - 0.5) * 14
-      tiltRef.current.ty = (0.5 - py) * 10
-      setSpotlight({ x: px * 100, y: py * 100, active: true })
-    }
-
-    const onLeave = () => {
-      tiltRef.current.tx = 0
-      tiltRef.current.ty = 0
-      setSpotlight((s) => ({ ...s, active: false }))
-    }
-
-    card.addEventListener('mousemove', onMove)
-    card.addEventListener('mouseleave', onLeave)
-    rafRef.current = requestAnimationFrame(smooth)
-
-    return () => {
-      active = false
-      card.removeEventListener('mousemove', onMove)
-      card.removeEventListener('mouseleave', onLeave)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
-  }, [])
-
+function TrackCard({ track }: { track: typeof tracks[0] }) {
   return (
     <article
-      ref={cardRef}
-      className="track-card group relative flex-shrink-0 w-[86vw] md:w-[42vw] lg:w-[32vw] h-full px-5 md:px-7 py-6 flex flex-col justify-between overflow-hidden"
-      style={{
-        transformStyle: 'preserve-3d',
-        willChange: 'transform',
-      }}
+      className="group relative flex-shrink-0 w-[86vw] md:w-[42vw] lg:w-[32vw] h-full px-5 md:px-7 py-6 flex flex-col justify-between overflow-hidden bg-void-raised border border-edge-faint"
     >
-      {/* Chroma grid + cyan gradient border wrapper */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-0 chroma-border"
-        style={{
-          background:
-            'linear-gradient(135deg, rgba(0,255,221,0.14) 0%, rgba(0,255,221,0.02) 40%, rgba(0,255,221,0.02) 60%, rgba(0,255,221,0.14) 100%)',
-          padding: '1px',
-        }}
-      >
-        <div
-          className="w-full h-full bg-void-raised"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(236,232,217,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(236,232,217,0.045) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-      </div>
-
-      {/* Spotlight border */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[2] pointer-events-none transition-opacity duration-300"
-        style={{
-          opacity: spotlight.active ? 1 : 0,
-          background: `radial-gradient(circle 260px at ${spotlight.x}% ${spotlight.y}%, rgba(0,255,221,0.18), transparent 65%)`,
-          padding: '1px',
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-        }}
-      />
-
-      {/* Scanline overlay */}
-      <div
-        aria-hidden="true"
-        className="scanlines absolute inset-0 z-[3] opacity-[0.22] group-hover:opacity-[0.45] transition-opacity duration-300 pointer-events-none"
-      />
-
-      {/* Edge glow */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{
-          boxShadow: 'inset 0 0 80px rgba(0,255,221,0.08)',
-        }}
-      />
-
-      {/* Top index strip */}
       <div className="relative z-10 flex items-start justify-between border-b border-edge-faint pb-3 mb-3">
         <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-signal">{track.num}</span>
-        <span className="font-mono text-[10px] tracking-[0.15em] text-light-muted">{String(index + 1).padStart(2, '0')} / 09</span>
       </div>
 
-      {/* Track data */}
       <div className="relative z-10">
-        <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.04em] uppercase leading-[0.9] text-cream group-hover:text-neon transition-colors duration-300">
+        <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.04em] uppercase leading-[0.9] text-cream group-hover:text-signal transition-colors duration-300">
           {track.name}
         </h3>
 
-        {/* Bento metadata strips */}
-        <div className="mt-5 meta-strip">
+        <div className="mt-5 border-y border-edge-faint">
           <div className="grid grid-cols-3 divide-x divide-edge-faint">
             <div className="p-2.5 md:p-3">
               <div className="font-mono text-[8px] tracking-[0.2em] uppercase text-light-muted mb-0.5">BPM</div>
-              <div className="font-mono text-lg md:text-xl tracking-[-0.02em] text-cream data-tick">{track.bpm}</div>
+              <div className="font-mono text-lg md:text-xl tracking-[-0.02em] text-cream">{track.bpm}</div>
             </div>
             <div className="p-2.5 md:p-3">
               <div className="font-mono text-[8px] tracking-[0.2em] uppercase text-light-muted mb-0.5">KEY</div>
@@ -453,27 +315,12 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
         </div>
       </div>
 
-      {/* Bottom label stamp */}
       <div className="relative z-10 mt-auto pt-3 border-t border-edge-faint flex items-center justify-between">
         <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-light-muted">MANTEIS RECORDINGS</span>
-        <div className="relative border border-edge-subtle px-2 py-0.5 overflow-hidden">
-          <div className="absolute inset-0 stamp-texture" aria-hidden="true" />
-          <span className="relative font-mono text-[8px] tracking-[0.2em] uppercase text-signal">MR-008</span>
+        <div className="border border-edge-subtle px-2 py-0.5">
+          <span className="font-mono text-[8px] tracking-[0.2em] uppercase text-signal">MR-008</span>
         </div>
       </div>
-
-      {/* Connector */}
-      {index < tracks.length - 1 && (
-        <svg
-          className="absolute -right-[1px] top-1/2 -translate-y-1/2 w-[40px] h-[40%] z-20 pointer-events-none"
-          viewBox="0 0 40 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <line x1="0" y1="50" x2="40" y2="50" className="connector-line pulse-connector" style={{ strokeDasharray: '6 4' }} />
-          <circle cx="38" cy="50" r="2.5" fill="rgba(0,255,221,0.55)" className="pulse-connector" />
-        </svg>
-      )}
     </article>
   )
 }
