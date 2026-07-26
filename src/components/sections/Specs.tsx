@@ -25,7 +25,7 @@ export function Specs() {
 
   return (
     <section ref={sectionRef} className="py-20 md:py-28 relative bg-void">
-      <div className="relative max-w-6xl mx-auto px-6 md:px-12">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-edge-faint border border-edge-faint">
           {specs.map((spec, i) => (
             <div
@@ -33,7 +33,7 @@ export function Specs() {
               className="spec-cell p-6 md:p-10 flex flex-col items-center justify-center text-center relative"
               style={{ borderLeft: i > 0 ? undefined : 'none' }}
             >
-              <div className="font-mono text-4xl md:text-5xl font-bold tracking-[-0.04em] text-cream">
+              <div className="font-mono text-[clamp(1.75rem,8vw,5rem)] md:text-5xl font-bold tracking-[-0.04em] text-cream">
                 {spec.label}
               </div>
               <div className="font-mono text-[9px] tracking-[0.25em] uppercase mt-2 text-light-muted">

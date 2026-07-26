@@ -1,10 +1,10 @@
 export function Footer() {
   return (
     <footer className="py-16 md:py-24 border-t border-edge-faint relative bg-void">
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
           <div>
-            <h3 className="font-display text-2xl font-bold tracking-[-0.02em] uppercase text-cream">
+            <h3 className="font-display text-xl md:text-2xl font-bold tracking-[-0.02em] uppercase text-cream">
               Thesan <span className="text-signal">Musique</span>
             </h3>
             <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-light-muted mt-2">
@@ -23,7 +23,7 @@ export function Footer() {
               href="https://open.spotify.com/album/34IoM42BGoMQ7VoeeZSWlh"
               target="_blank"
               rel="noreferrer noopener"
-              className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-200"
+              className="inline-flex items-center min-h-[44px] font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-200"
             >
               Spotify
             </a>
@@ -31,7 +31,7 @@ export function Footer() {
               href="https://music.apple.com/us/artist/thesan-musique"
               target="_blank"
               rel="noreferrer noopener"
-              className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-200"
+              className="inline-flex items-center min-h-[44px] font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-200"
             >
               Apple Music
             </a>

@@ -71,7 +71,7 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-void"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-void pt-16 md:pt-0"
     >
       <div
         aria-hidden="true"
@@ -95,13 +95,13 @@ export function Hero() {
         aria-hidden="true"
         className="absolute inset-0 flex items-center justify-center z-[2] pointer-events-none"
       >
-        <span className="catalog-massive text-[20vw] md:text-[16vw] font-bold uppercase">
+        <span className="catalog-massive text-[clamp(4rem,20vw,16rem)] md:text-[clamp(8rem,16vw,16rem)] font-bold uppercase">
           MR-008
         </span>
       </div>
 
       <div ref={titleRef} className="relative z-10 text-center opacity-0">
-        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
+        <h1 className="font-display text-[clamp(2.75rem,14vw,13rem)] md:text-[clamp(6rem,12vw,13rem)] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
           <span className="block text-cream">Thesan</span>
           <span className="block text-signal">Musique</span>
         </h1>

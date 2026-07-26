@@ -243,7 +243,7 @@ export function Tracks() {
         aria-hidden="true"
         className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[1] pointer-events-none"
       >
-        <span className="catalog-massive text-[38vw] md:text-[30vw]">MR-008</span>
+        <span className="catalog-massive text-[clamp(5rem,38vw,24rem)] md:text-[clamp(10rem,30vw,24rem)]">MR-008</span>
       </div>
 
       <div
@@ -293,7 +293,7 @@ function TrackCard({ track }: { track: typeof tracks[0] }) {
       </div>
 
       <div className="relative z-10">
-        <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.04em] uppercase leading-[0.9] text-cream group-hover:text-signal transition-colors duration-300">
+        <h3 className="font-display text-[clamp(1.5rem,7vw,3rem)] md:text-4xl lg:text-5xl font-bold tracking-[-0.04em] uppercase leading-[0.9] text-cream group-hover:text-signal transition-colors duration-300">
           {track.name}
         </h3>
 
@@ -301,15 +301,15 @@ function TrackCard({ track }: { track: typeof tracks[0] }) {
           <div className="grid grid-cols-3 divide-x divide-edge-faint">
             <div className="p-2.5 md:p-3">
               <div className="font-mono text-[8px] tracking-[0.2em] uppercase text-light-muted mb-0.5">BPM</div>
-              <div className="font-mono text-lg md:text-xl tracking-[-0.02em] text-cream">{track.bpm}</div>
+              <div className="font-mono text-base md:text-xl tracking-[-0.02em] text-cream">{track.bpm}</div>
             </div>
             <div className="p-2.5 md:p-3">
               <div className="font-mono text-[8px] tracking-[0.2em] uppercase text-light-muted mb-0.5">KEY</div>
-              <div className="font-mono text-lg md:text-xl tracking-[-0.02em] text-cream">{track.key}</div>
+              <div className="font-mono text-base md:text-xl tracking-[-0.02em] text-cream">{track.key}</div>
             </div>
             <div className="p-2.5 md:p-3">
               <div className="font-mono text-[8px] tracking-[0.2em] uppercase text-light-muted mb-0.5">DUR</div>
-              <div className="font-mono text-lg md:text-xl tracking-[-0.02em] text-cream">{track.duration}</div>
+              <div className="font-mono text-base md:text-xl tracking-[-0.02em] text-cream">{track.duration}</div>
             </div>
           </div>
         </div>

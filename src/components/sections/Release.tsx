@@ -31,12 +31,12 @@ export function Release() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         <div className="section-label mb-20">Release /</div>
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
           {/* Cover art */}
-          <div className="release-cover w-full md:w-1/2">
+          <div className="release-cover w-full md:w-1/2 col-span-12 md:col-span-6">
             <div
               className="relative aspect-square overflow-hidden rect-mask"
               style={{
@@ -63,7 +63,7 @@ export function Release() {
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-signal mb-4">
               MR-008 · 2025
             </div>
-            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.88] mb-2 uppercase text-cream">
+            <h2 className="font-display text-[clamp(2.5rem,9vw,8rem)] md:text-[clamp(4rem,7vw,8rem)] font-bold tracking-[-0.04em] leading-[0.88] mb-2 uppercase text-cream">
               Ataraxia
             </h2>
             <p className="font-display text-xl md:text-2xl text-light-dim font-semibold mb-6">
@@ -83,7 +83,7 @@ export function Release() {
                 href="https://distrokid.com/hyperfollow/thesanmusique/ataraxia"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="relative font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 border border-signal text-signal hover:bg-signal hover:text-void transition-colors duration-200"
+                className="relative inline-flex items-center justify-center min-h-[44px] font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 border border-signal text-signal hover:bg-signal hover:text-void transition-colors duration-200"
               >
                 <span className="relative z-10">Listen Now</span>
               </a>
@@ -91,7 +91,7 @@ export function Release() {
                 href="https://open.spotify.com/album/34IoM42BGoMQ7VoeeZSWlh"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-300 uppercase"
+                className="inline-flex items-center min-h-[44px] font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-300 uppercase"
               >
                 Spotify →
               </a>
