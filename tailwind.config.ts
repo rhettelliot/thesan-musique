@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         void: {
-          DEFAULT: '#000000',
+          DEFAULT: '#0D0F12',
           raised: '#0C0C0C',
           elevated: '#141414',
           subtle: '#1C1C1C',

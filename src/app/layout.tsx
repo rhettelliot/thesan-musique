@@ -96,7 +96,7 @@ const jsonLd = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#000000',
+  themeColor: '#0D0F12',
   colorScheme: 'dark',
 }
 
