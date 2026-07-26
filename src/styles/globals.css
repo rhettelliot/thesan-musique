@@ -11,27 +11,28 @@
   --signal: #00FFDD;
   --signal-dim: #00B29B;
 
-  --neon: #00FFDD;
-  --neon-dim: #00B29B;
-  --neon-glow: rgba(0,255,221,0.45);
-  --neon-soft: rgba(0,255,221,0.12);
+  --cream: #ECE8D9;
+  --cream-dim: #C9C5B8;
+  --cream-muted: #8A877D;
 
-  --mag: #FF6B35;
-  --mag-glow: rgba(255,107,53,0.40);
-  --volt: #007AFF;
+  --edge-faint: rgba(236,232,217,0.07);
+  --edge-subtle: rgba(236,232,217,0.14);
+  --edge-medium: rgba(236,232,217,0.22);
+  --edge-bright: rgba(236,232,217,0.38);
 
-  --edge-faint: rgba(255,255,255,0.06);
-  --edge-subtle: rgba(255,255,255,0.12);
-  --edge-medium: rgba(255,255,255,0.2);
-  --edge-bright: rgba(255,255,255,0.35);
-
-  --light: #F0F0F0;
-  --light-dim: #A6A6A6;
-  --light-muted: #828282;
+  --light: #ECE8D9;
+  --light-dim: #C9C5B8;
+  --light-muted: #8A877D;
 
   --ease-cinematic: cubic-bezier(0.45, 0.05, 0.55, 0.95);
   --ease-enter: cubic-bezier(0, 0, 0.25, 1);
   --ease-exit: cubic-bezier(0.75, 0, 1, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 * {
@@ -49,7 +50,7 @@ html {
 
 body {
   background: var(--void);
-  color: var(--light);
+  color: var(--cream);
   overflow-x: hidden;
 }
 
@@ -71,18 +72,18 @@ body {
   background: var(--signal);
 }
 
-/* Film grain — the only texture. Atmosphere, not decoration. */
+/* Subtle film grain texture overlay */
 .noise-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
-/* Silkscreen section label — hardware faceplate etching */
+/* Silkscreen section label */
 .section-label {
   @apply font-mono text-[10px] font-bold tracking-[0.3em] uppercase text-signal;
 }
@@ -93,20 +94,10 @@ body {
   background: var(--edge-subtle);
 }
 
-/* Signal rule — solid, no glow. Light is information. */
+/* Signal rule */
 .rule-signal {
   height: 2px;
   background: var(--signal);
-}
-
-/* Strobe flash overlay — single hard flash, no bloom */
-.strobe-flash {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
-  background: var(--light);
-  opacity: 0;
 }
 
 /* Reduced motion */
@@ -120,10 +111,23 @@ body {
   }
 }
 
-/* Keyboard navigation — signal outline, only for keyboard focus */
+/* Keyboard navigation — signal outline */
 :focus-visible {
-  outline: 1px solid var(--signal);
+  outline: 2px solid var(--signal);
   outline-offset: 3px;
+}
+
+/* Signal text on dark */
+.text-signal,
+[data-signal] {
+  color: var(--signal);
+}
+
+a:hover.text-signal,
+a:focus-visible.text-signal,
+[data-signal]:hover,
+[data-signal]:focus-visible {
+  color: var(--signal);
 }
 
 /* Anchored sections land below the fixed nav */
@@ -131,57 +135,7 @@ section[id] {
   scroll-margin-top: 88px;
 }
 
-/* Utility patterns */
-.text-neon-glow {
-  text-shadow: 0 0 18px var(--neon-glow), 0 0 36px var(--neon-soft);
-}
-
-.text-mag-glow {
-  text-shadow: 0 0 18px var(--mag-glow);
-}
-
-.text-hero-glow {
-  text-shadow:
-    0 0 24px var(--neon-glow),
-    0 0 48px var(--neon-soft),
-    0 0 80px rgba(0,255,221,0.06);
-}
-
-.btn-snap {
-  transition: transform 0.15s var(--ease-enter), background 0.2s var(--ease-enter), color 0.2s var(--ease-enter);
-}
-.btn-snap:active {
-  transform: scale(0.97);
-}
-
-.bass-line {
-  height: 3px;
-  background: linear-gradient(90deg, var(--neon), var(--mag) 50%, transparent);
-  opacity: 0.8;
-}
-
-.divider-neon {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon) 20%, var(--mag) 50%, var(--neon) 80%, transparent);
-  opacity: 0.5;
-}
-
-/* Glass morphism helpers */
-.glass {
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(0,255,221,0.18);
-}
-
-/* Footer gradient rule */
-.footer-rule {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--neon) 15%, var(--mag) 50%, var(--neon) 85%, transparent);
-}
-
-
-/* Skip link - first focusable element for keyboard users */
+/* Skip link */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -201,4 +155,15 @@ section[id] {
   top: 1rem;
   outline: 2px solid var(--signal);
   outline-offset: 2px;
+}
+
+/* Massive catalog number watermark */
+.catalog-massive {
+  font-family: var(--font-mono), monospace;
+  color: rgba(236,232,217,0.06);
+  -webkit-text-stroke: 1px rgba(236,232,217,0.08);
+  letter-spacing: -0.06em;
+  line-height: 0.82;
+  user-select: none;
+  pointer-events: none;
 }

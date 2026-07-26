@@ -20,55 +20,57 @@ export function Release() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="release" className="py-32 md:py-48">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section ref={sectionRef} id="release" className="py-32 md:py-48 relative">
+      {/* Structural grid lines */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none opacity-10"
+        style={{
+          backgroundImage: `linear-gradient(rgba(236,232,217,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(236,232,217,0.04) 1px, transparent 1px)`,
+          backgroundSize: '140px 140px',
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
         <div className="section-label mb-20">Release /</div>
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
           {/* Cover art */}
           <div className="release-cover w-full md:w-1/2">
             <div
-              className="relative aspect-square overflow-hidden group"
+              className="relative aspect-square overflow-hidden rect-mask"
               style={{
                 border: '1px solid var(--edge-faint)',
-                boxShadow: '0 0 60px var(--neon-glow), 0 0 120px var(--mag-glow)',
               }}
             >
               <Image
                 src="/covers/Thesan.webp"
                 alt="Ataraxia cover art"
                 fill
-                className="object-cover transition-transform duration-500 ease-cinematic group-hover:scale-105"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
-              {/* Neon corner accent */}
-              <div className="absolute top-0 right-0 w-16 h-16">
-                <div
-                  className="absolute top-0 right-0 w-full h-[2px]"
-                  style={{ background: 'linear-gradient(270deg, var(--neon), transparent)' }}
-                />
-                <div
-                  className="absolute top-0 right-0 w-[2px] h-full"
-                  style={{ background: 'linear-gradient(180deg, var(--mag), transparent)' }}
-                />
-              </div>
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 border border-edge-faint"
+                style={{ clipPath: 'inset(6% 6% 6% 6%)' }}
+              />
             </div>
           </div>
 
-          {/* Release info */}
           <div className="release-info flex-1 py-4 md:py-12">
-            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-neon mb-4">
-              MR-002 · 2024
+            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-signal mb-4">
+              MR-008 · 2025
             </div>
-            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.88] mb-2 uppercase">
+            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.88] mb-2 uppercase text-cream">
               Ataraxia
             </h2>
-            <p className="font-display text-xl md:text-2xl text-mag font-semibold mb-6">
+            <p className="font-display text-xl md:text-2xl text-light-dim font-semibold mb-6">
               Thesan Musique
             </p>
 
-            <div className="bass-line w-24 mb-8" />
+            <div className="rule w-24 mb-8" />
 
             <p className="font-body text-base md:text-lg text-light-dim leading-relaxed mb-10 max-w-lg">
               A state of tranquil illumination through rhythm. Deep dance frequencies 
@@ -76,28 +78,25 @@ export function Release() {
               meeting DnB pressure — dance floor as meditation chamber.
             </p>
 
-            {/* Streaming links */}
             <div className="flex flex-wrap items-center gap-4 mb-12">
               <a
                 href="https://distrokid.com/hyperfollow/thesanmusique/ataraxia"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 border border-neon text-neon btn-snap hover:bg-neon hover:text-void transition-colors duration-200"
-                style={{ boxShadow: '0 0 10px var(--neon-glow)' }}
+                className="relative font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 border border-signal text-signal hover:bg-signal hover:text-void transition-colors duration-200"
               >
-                Listen Now
+                <span className="relative z-10">Listen Now</span>
               </a>
               <a
                 href="https://open.spotify.com/album/34IoM42BGoMQ7VoeeZSWlh"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-neon transition-colors duration-300 uppercase"
+                className="font-mono text-[10px] tracking-[0.1em] text-light-muted hover:text-signal transition-colors duration-300 uppercase"
               >
                 Spotify →
               </a>
             </div>
 
-            {/* Genre tags */}
             <div className="flex flex-wrap gap-2">
               {['Deep Dance', 'Techno', 'Drum & Bass', 'Electronic'].map((tag) => (
                 <span
@@ -112,7 +111,7 @@ export function Release() {
         </div>
       </div>
 
-      <div className="divider-neon max-w-5xl mx-auto mt-32" />
+      <div className="rule max-w-5xl mx-auto mt-32" />
     </section>
   )
 }

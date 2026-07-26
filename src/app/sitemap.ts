@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://thesanmusique.com',
+      url: 'https://thesan-musique-site.vercel.app',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,

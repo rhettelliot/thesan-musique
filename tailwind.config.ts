@@ -9,47 +9,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Void Architecture — absolute black, depth carved from nothing
         void: {
           DEFAULT: '#000000',
           raised: '#0C0C0C',
           elevated: '#141414',
           subtle: '#1C1C1C',
         },
-        // Single Signal — warehouse cyan. Active states, key data, section labels only.
         signal: {
           DEFAULT: '#00FFDD',
           dim: '#00B29B',
         },
-        // Neon / Mag / Volt aliases used across components
-        neon: {
-          DEFAULT: '#00FFDD',
-          dim: '#00B29B',
-          glow: 'rgba(0,255,221,0.45)',
-        },
-        mag: {
-          DEFAULT: '#FF6B35',
-          glow: 'rgba(255,107,53,0.40)',
-        },
-        volt: {
-          DEFAULT: '#007AFF',
+        cream: {
+          DEFAULT: '#ECE8D9',
+          dim: '#C9C5B8',
+          muted: '#8A877D',
         },
         edge: {
-          faint: 'rgba(255,255,255,0.06)',
-          subtle: 'rgba(255,255,255,0.12)',
-          medium: 'rgba(255,255,255,0.2)',
-          bright: 'rgba(255,255,255,0.35)',
+          faint: 'rgba(236,232,217,0.07)',
+          subtle: 'rgba(236,232,217,0.14)',
+          medium: 'rgba(236,232,217,0.22)',
+          bright: 'rgba(236,232,217,0.38)',
         },
         light: {
-          DEFAULT: '#F0F0F0',
-          dim: '#A6A6A6',
-          muted: '#828282',
+          DEFAULT: '#ECE8D9',
+          dim: '#C9C5B8',
+          muted: '#8A877D',
         },
       },
       fontFamily: {
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-body)', 'system-ui', 'sans-serif'],
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       transitionTimingFunction: {
         cinematic: 'cubic-bezier(0.45, 0.05, 0.55, 0.95)',
@@ -65,20 +55,15 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateY(30px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
-        flicker: {
-          '0%, 100%': { opacity: '1' },
-          '10%': { opacity: '0.8' },
-          '20%': { opacity: '1' },
-          '40%': { opacity: '0.6' },
-          '50%': { opacity: '1' },
-          '70%': { opacity: '0.9' },
-          '80%': { opacity: '1' },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       animation: {
         'fade-in': 'fade-in 0.8s cubic-bezier(0, 0, 0.25, 1) forwards',
         'slide-up': 'slide-up 0.6s cubic-bezier(0, 0, 0.25, 1) forwards',
-        flicker: 'flicker 3s ease-in-out infinite',
+        marquee: 'marquee 18s linear infinite',
       },
     },
   },

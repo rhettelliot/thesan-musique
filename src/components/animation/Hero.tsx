@@ -1,11 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { prefersReducedMotion } from '@/lib/motion'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -14,121 +10,119 @@ export function Hero() {
   const indicatorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const isReduced = prefersReducedMotion()
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 })
+    let ctx: { revert: () => void } | undefined
+    let cancelled = false
 
-      // Title slams in
-      tl.fromTo(
-        titleRef.current,
-        { opacity: 0, y: isReduced ? 0 : 80, scaleY: isReduced ? 1 : 1.2 },
-        { opacity: 1, y: 0, scaleY: 1, duration: isReduced ? 0.2 : 0.8, ease: 'power4.out' }
-      )
+    ;(async () => {
+      const gsapModule = await import('gsap')
+      const scrollTriggerModule = await import('gsap/ScrollTrigger')
+      const gsap = gsapModule.gsap
+      const { ScrollTrigger } = scrollTriggerModule
+      if (cancelled) return
+      gsap.registerPlugin(ScrollTrigger)
+      const isReduced = prefersReducedMotion()
 
-      tl.fromTo(
-        subRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power2.out' },
-        '-=0.3'
-      )
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({ delay: 0.2 })
 
-      // Scroll indicator
-      if (!isReduced) {
-        gsap.to(indicatorRef.current, {
-          y: 10,
-          duration: 1.2,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        })
-      }
+        tl.fromTo(
+          titleRef.current,
+          { opacity: 0, y: isReduced ? 0 : 40 },
+          { opacity: 1, y: 0, duration: isReduced ? 0.2 : 0.7, ease: 'power3.out' },
+          0.15
+        )
 
-      // Parallax on scroll
-      if (!isReduced) {
-        gsap.to(titleRef.current, {
-          y: -100,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1,
-          },
-        })
-      }
-    }, heroRef)
+        tl.fromTo(
+          subRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: isReduced ? 0.2 : 0.6, ease: 'power2.out' },
+          0.45
+        )
 
-    return () => ctx.revert()
+        if (!isReduced) {
+          gsap.to(indicatorRef.current, {
+            y: 8,
+            duration: 1.4,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+          })
+
+          gsap.to(titleRef.current, {
+            y: -60,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          })
+        }
+      }, heroRef)
+    })()
+
+    return () => {
+      cancelled = true
+      if (ctx) ctx.revert()
+    }
   }, [])
 
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-void"
     >
-      {/* Grid overlay — faint rave grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none opacity-20"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(0,122,255,0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,122,255,0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
+          backgroundImage: `linear-gradient(rgba(236,232,217,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(236,232,217,0.04) 1px, transparent 1px)`,
+          backgroundSize: '120px 120px',
         }}
       />
 
-      {/* Radial glow — cyan core */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(0,122,255,0.1) 0%, rgba(255,107,53,0.04) 40%, transparent 70%)',
-          }}
-        />
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-[35vh] z-[1] opacity-40"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 100%, rgba(0,255,221,0.06) 0%, transparent 70%)',
+        }}
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center z-[2] pointer-events-none"
+      >
+        <span className="catalog-massive text-[20vw] md:text-[16vw] font-bold uppercase">
+          MR-008
+        </span>
       </div>
 
-      {/* Side EQ bars */}
-      <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 flex flex-col-reverse items-end gap-[2px]">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="w-[2px] rounded-full"
-            style={{
-              height: `${6 + Math.abs(Math.sin(i * 0.4)) * 30}px`,
-              backgroundColor: i % 5 === 0 ? 'var(--mag)' : i % 2 === 0 ? 'var(--neon)' : 'var(--light-muted)',
-              opacity: 0.4 + (i % 3) * 0.15,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Title */}
-      <div ref={titleRef} className="relative z-10 text-center px-4">
-        <h1 className="font-display text-[clamp(40px,8vw,96px)] font-bold tracking-[-0.05em] leading-[0.82] uppercase text-hero-glow">
-          <span className="block">Thesan</span>
-          <span className="block text-neon text-neon-glow">Musique</span>
+      <div ref={titleRef} className="relative z-10 text-center opacity-0">
+        <h1 className="font-display text-7xl md:text-[10rem] lg:text-[13rem] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
+          <span className="block text-cream">Thesan</span>
+          <span className="block text-signal">Musique</span>
         </h1>
       </div>
 
-      {/* Subtitle */}
-      <div ref={subRef} className="relative z-10 mt-6 text-center">
+      <div ref={subRef} className="relative z-10 mt-8 text-center opacity-0">
         <p className="font-mono text-[10px] tracking-[0.35em] uppercase text-light-muted">
-          Deep Dance · Techno · Drum & Bass · MR-002
+          Deep Dance · Techno · Drum & Bass · MR-008
         </p>
-        <div className="mt-4 bass-line w-40 mx-auto" />
+        <div className="mt-6 rule w-40 mx-auto" />
       </div>
 
-      {/* Scroll */}
       <div
         ref={indicatorRef}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        aria-hidden="true"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-light-muted">
-          Drop
+          Scroll
         </span>
-        <svg width="14" height="22" viewBox="0 0 14 22" fill="none" className="text-neon">
+        <svg width="14" height="22" viewBox="0 0 14 22" fill="none" className="text-signal">
           <path d="M7 4 L7 16 M3 12 L7 16 L11 12" stroke="currentColor" strokeWidth="1.5" />
         </svg>
       </div>

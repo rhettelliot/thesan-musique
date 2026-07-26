@@ -27,37 +27,28 @@ export function Manifesto() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="manifesto" className="py-32 md:py-48 overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6 md:px-12 relative">
+    <section ref={sectionRef} id="manifesto" className="py-32 md:py-48 relative bg-void">
+      <div className="relative max-w-5xl mx-auto px-6 md:px-12">
         <div className="section-label mb-20">Manifesto /</div>
 
-        <div className="space-y-6 md:space-y-8 relative z-10">
+        <div className="space-y-6 md:space-y-8">
           {manifesto.map((line, i) => (
-            <div key={i} className="relative">
-              <span
-                className="absolute -left-4 md:-left-12 -top-6 md:-top-10 font-display text-[120px] md:text-[200px] font-bold leading-none text-neon opacity-[0.03] select-none pointer-events-none z-0"
-                aria-hidden="true"
-              >
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <p
-                className={`mantra-line relative z-10 font-display text-2xl md:text-4xl lg:text-5xl leading-[1.12] tracking-[-0.02em] uppercase ${
-                  i === manifesto.length - 1
-                    ? 'font-bold text-neon text-neon-glow'
-                    : i === 0
-                      ? 'font-bold text-mag'
-                      : i === manifesto.length - 2
-                        ? 'text-light-dim'
-                        : 'text-light'
-                }`}
-              >
-                {line}
-              </p>
-            </div>
+            <p
+              key={i}
+              className={`mantra-line font-display text-2xl md:text-4xl lg:text-5xl leading-[1.12] tracking-[-0.02em] uppercase ${
+                i === manifesto.length - 1
+                  ? 'font-bold text-signal'
+                  : i === 0
+                    ? 'font-bold text-cream'
+                    : 'text-light-dim'
+              }`}
+            >
+              {line}
+            </p>
           ))}
         </div>
 
-        <div className="mt-16 bass-line w-32" />
+        <div className="mt-16 rule w-32" />
       </div>
     </section>
   )
