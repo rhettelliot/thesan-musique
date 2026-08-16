@@ -87,7 +87,7 @@ export function Hero() {
         className="absolute bottom-0 left-0 right-0 h-[35vh] z-[1] opacity-40"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 100%, rgba(0,255,221,0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse at 50% 100%, rgba(255,85,0,0.06) 0%, transparent 70%)',
         }}
       />
 
@@ -100,14 +100,14 @@ export function Hero() {
         </span>
       </div>
 
-      <div ref={titleRef} className="relative z-10 text-center opacity-0">
+      <div ref={titleRef} className="relative z-10 text-center" style={{ opacity: 1 }}>
         <h1 className="font-display text-[clamp(2.75rem,14vw,13rem)] md:text-[clamp(6rem,12vw,13rem)] font-bold tracking-[-0.06em] leading-[0.78] uppercase">
           <span className="block text-cream">Thesan</span>
           <span className="block text-signal">Musique</span>
         </h1>
       </div>
 
-      <div ref={subRef} className="relative z-10 mt-8 text-center opacity-0">
+      <div ref={subRef} className="relative z-10 mt-8 text-center" style={{ opacity: 1 }}>
         <p className="font-mono text-[10px] tracking-[0.35em] uppercase text-light-muted">
           Deep Dance · Techno · Drum & Bass · MR-008
         </p>
@@ -118,6 +118,7 @@ export function Hero() {
         ref={indicatorRef}
         aria-hidden="true"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        style={{ opacity: 1 }}
       >
         <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-light-muted">
           Scroll

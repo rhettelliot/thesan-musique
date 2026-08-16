@@ -6,6 +6,7 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const links = [
+    { href: '#specs', label: 'Specs' },
     { href: '#release', label: 'Release' },
     { href: '#tracks', label: 'Tracks' },
     { href: '#manifesto', label: 'Manifesto' },

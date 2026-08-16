@@ -107,16 +107,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body className="bg-[#0D0F12] text-[#9EA4B0] antialiased">
-        <div className="grain" />
-        <a href="#main-content" className="skip-link">Skip to main content</a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <div className="noise-overlay" />
-        {children}
-      </body>
+      <body className="bg-canvas text-ink-2 antialiased">
+          <div className="grain" aria-hidden="true" />
+          <a href="#main-content" className="skip-link">Skip to main content</a>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          {children}
+        </body>
     </html>
   )
 }

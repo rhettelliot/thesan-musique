@@ -9,35 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        canvas: '#0D0F12',
+        surface: '#15181E',
+        'surface-hi': '#1A1E24',
+        ink: {
+          DEFAULT: '#F4F3EE',
+          2: '#9EA4B0',
+          3: '#5C6370',
+          ghost: 'rgba(244, 243, 238, 0.20)',
+        },
+        signal: '#FF5500',
+        'signal-dim': 'rgba(255, 85, 0, 0.15)',
+        border: 'rgba(255, 255, 255, 0.08)',
+        'border-hi': 'rgba(255, 255, 255, 0.14)',
+        cream: '#F4F3EE',
+        // Legacy aliases
         void: {
           DEFAULT: '#0D0F12',
-          raised: '#0C0C0C',
-          elevated: '#141414',
+          raised: '#15181E',
+          elevated: '#1A1E24',
           subtle: '#1C1C1C',
         },
-        signal: {
-          DEFAULT: '#00FFDD',
-          dim: '#00B29B',
-        },
-        cream: {
-          DEFAULT: '#ECE8D9',
-          dim: '#C9C5B8',
-          muted: '#8A877D',
-        },
         edge: {
-          faint: 'rgba(236,232,217,0.07)',
-          subtle: 'rgba(236,232,217,0.14)',
-          medium: 'rgba(236,232,217,0.22)',
-          bright: 'rgba(236,232,217,0.38)',
+          faint: 'rgba(244,243,238,0.07)',
+          subtle: 'rgba(244,243,238,0.14)',
+          medium: 'rgba(244,243,238,0.22)',
+          bright: 'rgba(244,243,238,0.38)',
         },
         light: {
-          DEFAULT: '#ECE8D9',
-          dim: '#C9C5B8',
-          muted: '#8A877D',
+          DEFAULT: '#F4F3EE',
+          dim: '#9EA4B0',
+          muted: '#5C6370',
         },
       },
       fontFamily: {
-        display: ['var(--font-display)', 'var(--font-body)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-body)', 'system-ui', 'sans-serif'],
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
